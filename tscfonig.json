@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        /* Module resolution*/
+        "module": "commonjs",
+        "moduleResolution" : "node",
+
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+
+        "outFile": "./",
+        "sourceMap": true
+    },
+    "files": [
+        "src/**.ts"
+    ]
+}
