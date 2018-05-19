@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "gulp": "^3.9.1",
+    "gulp-typescript": "^4.0.2",
     "typescript": "^2.8.3",
     "webpack": "^4.8.3"
   }
