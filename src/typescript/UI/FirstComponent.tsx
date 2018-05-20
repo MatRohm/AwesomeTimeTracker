@@ -1,10 +1,10 @@
-import * as React from "react";
+import * as React from 'react';
 
-let Logo ="https://logrocket.com/img/logo.png";
+const Logo = 'https://logrocket.com/img/logo.png';
 
 export default class FirstComponent extends React.Component <{}> {
 
-    render() {
+    public render() {
         return (
             <div>
                 {/* React components must have a wrapper node/element */}

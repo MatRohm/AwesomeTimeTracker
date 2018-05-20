@@ -1,16 +1,15 @@
-import * as React from "react";
+import * as React from 'react';
 
-import {Domain} from "../domain/User";
-import IUser = Domain.IUser;
+import {IUser} from '../domain/User';
 
+export default class UserComponent extends React.Component<IUser, IUser, {}> {
 
-export default class UserComponent extends React.Component<IUser, {}> {
-
-    constructor (props: UserInterface){
+    constructor(props: IUser) {
         super(props);
     }
-    render() {
+    public render() {
         return (  <div>
+                <button onClick={e => this.props.handleClick()}>Check</button>
                 <h1>User Component</h1>
                 Hello, {this.props.name}
                 <br/>
