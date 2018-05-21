@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import FirstComponent from "./FirstComponent";
+import UserComponent from './UserComponent';
 
 ReactDOM.render(
     <div>
