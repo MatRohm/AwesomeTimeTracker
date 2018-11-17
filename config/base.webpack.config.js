@@ -43,7 +43,7 @@ const clientBaseConfig = {
     },
     output: {
         filename: "bundle.js",
-        path: path.resolve(__dirname, "../_dist"),
+        path: path.resolve(__dirname, "../_app"),
     }
 };
 

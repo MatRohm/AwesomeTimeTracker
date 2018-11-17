@@ -1,3 +1,5 @@
+// This is the entry point for the electron app start 
+
 const electron = require("electron");
 // Module to control application life.
 const app = electron.app;
@@ -18,7 +20,7 @@ function createWindow() {
     mainWindow.setMenu(null);
     // and load the index.html of the app.
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, "_dist/index.html"),
+        pathname: path.join(__dirname, "../_app/index.html"),
         protocol: "file:",
         slashes: true,
     }));

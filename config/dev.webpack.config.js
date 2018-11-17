@@ -6,7 +6,7 @@ const clientBaseConfig = require('./base.webpack.config');
 // Create one plugin for both renderer and main process
 const ElectronReloadWebpackPlugin = createElectronReloadWebpackPlugin({
   // Other 'electron-connect' options
-  path: path.resolve(__dirname, "../main.js"),
+  path: path.resolve(__dirname, "../src/main.js"),
   logLevel: 0,
 });
 

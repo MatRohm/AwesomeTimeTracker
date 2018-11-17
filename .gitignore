@@ -1,6 +1,6 @@
 # Application specific
 _package/**
-_dist/**
+_app/**
 
 # User-specific stuff
 .idea/**/workspace.xml
