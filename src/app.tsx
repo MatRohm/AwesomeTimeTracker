@@ -23,7 +23,7 @@ const footer = {
   gridArea: 'footer'
 };
 
-const user: IUser = new User('YOLO', 123);
+const user: IUser = new User('YOLO', 1234);
 
 ReactDOM.render(
   <div className="root">

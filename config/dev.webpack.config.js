@@ -11,7 +11,7 @@ const ElectronReloadWebpackPlugin = createElectronReloadWebpackPlugin({
 });
 
 const devConfig = {
-  devtool: "inline-source-map",
+  devtool: "source-maps",
   watch: true,
 };
 
