@@ -12,8 +12,10 @@
   "dependencies": {
     "@types/react": "^16.7.6",
     "@types/react-dom": "^16.0.9",
+    "D": "^1.0.0",
     "awesome-typescript-loader": "^5.2.1",
     "electron": "^2.0.13",
+    "file-loader": "^2.0.0",
     "npm": "^6.4.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -23,9 +25,11 @@
     "webpack": "^4.25.1"
   },
   "devDependencies": {
+    "css-loader": "^1.0.1",
     "electron-connect": "^0.6.3",
     "electron-reload-webpack-plugin": "^2.0.4",
     "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.1",
     "tslint": "^5.11.0",
     "webpack-cli": "^3.1.2",
     "webpack-merge": "^4.1.4"

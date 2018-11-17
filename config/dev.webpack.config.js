@@ -1,7 +1,7 @@
 const path = require("path");
 const createElectronReloadWebpackPlugin = require("electron-reload-webpack-plugin");
 const merge = require('webpack-merge');
-const clientBaseConfig = require('./webpack.config');
+const clientBaseConfig = require('./base.webpack.config');
 
 // Create one plugin for both renderer and main process
 const ElectronReloadWebpackPlugin = createElectronReloadWebpackPlugin({
@@ -10,16 +10,17 @@ const ElectronReloadWebpackPlugin = createElectronReloadWebpackPlugin({
   logLevel: 0,
 });
 
-const devConfig = merge(clientBaseConfig, {
+const devConfig = {
   devtool: "inline-source-map",
   watch: true,
-});
+};
 
-const electonConfig = merge(devConfig, {
+const electonConfig = {
   target: "electron-renderer",
   plugins: [
     ElectronReloadWebpackPlugin(),
   ],
-});
+};
 
-module.exports = [devConfig, electonConfig];
+const webpackConfig = merge(clientBaseConfig, devConfig, electonConfig);
+module.exports = [webpackConfig];

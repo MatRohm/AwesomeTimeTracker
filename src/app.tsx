@@ -1,7 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { IUser, User } from '../domain/User';
-import UserComponent from './UserComponent';
+import { IUser, User } from './typescript/domain/User';
+import UserComponent from './typescript/UI/UserComponent';
+
+import './app.css';
 
 const mainContentStyle = {
   gridArea: 'mainContent',
@@ -11,12 +13,7 @@ const menuStyle = {
   gridArea: 'menu',
   backgroundColor: 'green',
 };
-const rootStyle = {
-  display: 'grid',
-  gridTemplateColumns: '20% auto',
-  gridTemplateRows: '20% auto 10%',
-  gridTemplateAreas: 'header header menu mainContent footer footer',
-};
+
 
 const headerStyle = {
   gridArea: 'header',
@@ -29,7 +26,7 @@ const footer = {
 const user: IUser = new User('YOLO', 123);
 
 ReactDOM.render(
-  <div style={rootStyle}>
+  <div className="root">
     <header style={headerStyle}>header!</header>
     <div style={menuStyle}>
       Left pane
