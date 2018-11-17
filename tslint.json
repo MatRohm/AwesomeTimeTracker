@@ -3,7 +3,6 @@
     "extends": [
         "tslint:recommended"
     ],
-    "jsRules": {},
     "rules": {
         "no-any": true,
         "semicolon": [
@@ -19,7 +18,8 @@
         "no-arg": true,
         "quotemark": [
             true,
-            "single"
+            "single",
+            "jsx-single"
         ],
         "indent": [
             true,
