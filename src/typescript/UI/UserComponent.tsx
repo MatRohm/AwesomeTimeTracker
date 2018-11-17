@@ -9,7 +9,7 @@ export default class UserComponent extends React.Component<IUser, object> {
     }
     public render() {
         return <div>
-            <h1>Hi gg jjj hhh hh jjj44</h1>
+            <h1>Hi h444</h1>
             <button onClick={e => this.props.handleClick()}>Check</button>
             <h1>User Component</h1>
             Hello, {this.props.name}

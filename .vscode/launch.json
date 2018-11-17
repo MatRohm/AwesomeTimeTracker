@@ -22,7 +22,8 @@
       "name": "Launch Webpack",
       "program": "${workspaceFolder}/node_modules/webpack/bin/webpack.js",
       "args": [
-        "--mode=development"
+        "--mode=development",
+        "--config ./config/dev.webpack.config.js"
       ]
     }
   ]
