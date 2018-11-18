@@ -3,6 +3,7 @@
     "extends": [
         "tslint:recommended"
     ],
+    "linterOptions": {"exclude": ["_app", "node_modules"]},
     "jsRules": {
         "quotemark": [true, "single"],
         "curly": true,
