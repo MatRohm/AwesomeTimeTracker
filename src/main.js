@@ -16,7 +16,12 @@ let mainWindow;
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({ width: 1300, height: 500 });
+    mainWindow = new BrowserWindow({
+        width: 1300,
+        height: 800,
+        icon: path.resolve(__dirname, '../_app/icon.ico')
+    });
+
     mainWindow.setMenu(null);
     // and load the index.html of the app.
     mainWindow.loadURL(url.format({
@@ -35,7 +40,6 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null;
     });
-
 
     // Pass your BrowserWindow object
     client.create(mainWindow);

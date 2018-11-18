@@ -28,6 +28,7 @@
     "webpack": "^4.25.1"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
     "electron-connect": "^0.6.3",
     "electron-packager": "^12.2.0",

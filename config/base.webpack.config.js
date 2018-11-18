@@ -1,7 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const srcDir = path.resolve(__dirname, "../src/");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+
+const srcDir = path.resolve(__dirname, "../src/");
+const distDir = path.resolve(__dirname, "../_app/");
 
 // BUILD CSS
 // Do not use file-loader and css-loader together
@@ -36,7 +39,7 @@ const clientBaseConfig = {
                         outputPath: 'fonts/'
                     }
                 }]
-            }
+            },
         ],
     },
     plugins: [
@@ -49,14 +52,17 @@ const clientBaseConfig = {
                 title: "Custom template",
                 template: path.resolve(srcDir, "index.html"),
             },
-        )
+        ),
+        new CopyWebpackPlugin([
+            { from: path.resolve(srcDir, "assets/icon.ico"), to: distDir }
+        ])
     ],
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
     },
     output: {
         filename: "bundle.js",
-        path: path.resolve(__dirname, "../_app"),
+        path: distDir,
     }
 };
 
