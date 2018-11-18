@@ -3,18 +3,17 @@
     "extends": [
         "tslint:recommended"
     ],
+    "jsRules": {
+        "quotemark": [true, "single"],
+        "curly": true,
+        "object-literal-sort-keys": false
+    },
     "rules": {
         "no-any": true,
-        "semicolon": [
-            true,
-            "always"
-        ],
+        "semicolon": [true,"always"],
         "arrow-parens": false,
         "arrow-return-shorthand": true,
-        "curly": [
-            true,
-            "ignore-same-line"
-        ],
+        "curly": true,
         "no-arg": true,
         "quotemark": [
             true,
@@ -32,7 +31,7 @@
         ],
         "no-console": false,
         "object-literal-sort-keys": false,
-        "trailing-comma": false,
+        "trailing-comma": false
     },
     "rulesDirectory": []
 }

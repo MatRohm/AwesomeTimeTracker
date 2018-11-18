@@ -5,12 +5,12 @@ import './app.css';
 import CurrentWorkItem from './components/currentWorkItem/CurrentWorkItem';
 
 ReactDOM.render(
-  <div className="root">
+  <div className='root'>
     <header className='header'>header!</header>
     <div className='menu'>
       Left pane
         </div>
-    <main className="mainContent">
+    <main className='mainContent'>
       <CurrentWorkItem></CurrentWorkItem>
     </main>
     <footer className='footer'>FOOTER!</footer>
