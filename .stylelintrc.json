@@ -1,0 +1,9 @@
+{
+  "rules" : {
+    "block-no-empty" : true,
+    "max-empty-lines" : 1,
+    "rule-empty-line-before": ["always"],
+    "string-quotes": "single",
+    "comment-no-empty": true
+  }
+}

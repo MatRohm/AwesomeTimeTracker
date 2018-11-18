@@ -7,18 +7,18 @@ export interface IWorkItem {
 }
 
 export interface IWorkLog {
-  startDate: Date,
-  endDate: Date
+  startDate: Date;
+  endDate: Date;
 }
 
 export class WorkItem implements IWorkItem {
-  getWorkedTime(): string {
+  public name: string;
+  public worklogs: Collections.Set<IWorkLog>;
+  public getWorkedTime(): string {
     let sumOfMilliSeconds: number;
-    this.worklogs.forEach(o => { sumOfMilliSeconds += o.startDate.getTime() - o.endDate.getTime() });
-    let d = new Date();
+    this.worklogs.forEach(o => { sumOfMilliSeconds += o.startDate.getTime() - o.endDate.getTime(); });
+    const d = new Date();
     d.setMilliseconds(sumOfMilliSeconds);
     return `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
   }
-  name: string;
-  worklogs: Collections.Set<IWorkLog>;
 }

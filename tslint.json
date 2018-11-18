@@ -28,8 +28,9 @@
         ],
         "max-line-length": [
             true,
-            200
+            300
         ],
+        "no-empty":true,
         "no-console": false,
         "object-literal-sort-keys": false,
         "trailing-comma": false
