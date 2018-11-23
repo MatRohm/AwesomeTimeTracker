@@ -3,12 +3,12 @@ import { IWorkItem } from '../../shared/WorkItem';
 export class CurrentWorkItemService {
 
   public static GetInstance(): CurrentWorkItemService {
-    if (this._instance == null) {
-      this._instance = new CurrentWorkItemService();
+    if (this.instance == null) {
+      this.instance = new CurrentWorkItemService();
     }
-    return this._instance;
+    return this.instance;
   }
-  private static _instance: CurrentWorkItemService;
+  private static instance: CurrentWorkItemService;
 
   private constructor() {
   }
