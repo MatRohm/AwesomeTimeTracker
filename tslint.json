@@ -33,7 +33,7 @@
         "no-empty":true,
         "no-console": false,
         "object-literal-sort-keys": false,
-        "trailing-comma": false
+        "trailing-comma": false,
     },
     "rulesDirectory": []
 }
