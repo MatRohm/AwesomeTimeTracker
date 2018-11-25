@@ -1,10 +1,10 @@
-import IDataSource from './IDataSource';
+import IAutocompleteDataSource from './IAutocompleteDataSource';
 import AutoCompleteEntry from './AutoCompleteEntry';
 
 export class AutocompleteService {
-  private _dataSource: IDataSource;
+  private _dataSource: IAutocompleteDataSource;
 
-  constructor(dataSource: IDataSource) {
+  constructor(dataSource: IAutocompleteDataSource) {
     this._dataSource = dataSource;
   }
 

@@ -1,13 +1,13 @@
 import * as React from 'react';
-import IDataSource from './IDataSource';
+import IAutocompleteDataSource from './IAutocompleteDataSource';
 import { AutocompleteService } from './AutocompleteService';
 import AutoCompleteEntry from './AutoCompleteEntry';
 import { ReactComponentWrapper } from '../currentWorkItem/ReactComponentWrapper';
 
-export default class Autocomplete extends React.Component<ReactComponentWrapper<IDataSource>, { inputValue: string, entries: AutoCompleteEntry[] }> {
+export default class Autocomplete extends React.Component<ReactComponentWrapper<IAutocompleteDataSource>, { inputValue: string, entries: AutoCompleteEntry[] }> {
   private _service: AutocompleteService;
 
-  constructor(props: ReactComponentWrapper<IDataSource>) {
+  constructor(props: ReactComponentWrapper<IAutocompleteDataSource>) {
     super(props);
     console.log('props', props);
     this._service = new AutocompleteService(props.wrappedObject);

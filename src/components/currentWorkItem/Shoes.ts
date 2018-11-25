@@ -1,7 +1,7 @@
-import IDataSource from '../autocomplete/IDataSource';
+import IAutocompleteDataSource from '../autocomplete/IAutocompleteDataSource';
 import AutoCompleteEntry from '../autocomplete/AutoCompleteEntry';
 
-export class Shoes implements IDataSource {
+export class Shoes implements IAutocompleteDataSource {
 
   public func: any = this.GetEntries;
 
