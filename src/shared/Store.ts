@@ -1,9 +1,9 @@
 // follow https://github.com/louischatriot/nedb for further information
 import * as Nedb from 'nedb';
-import { WorkItem } from './BusinessModel/WorkItem';
-import { IWorkItem } from './BusinessModel/IWorkItem';
 import { ArgumentUtility } from './Arguments/ArgumentUtility';
 import { IWorkItemStore } from './IWorkItemStore';
+import { IWorkItem } from './businessModell/IWorkItem';
+import { WorkItem } from './businessModell/WorkItem';
 
 export class NeDBStore implements IWorkItemStore {
   public static GetDefault(): IWorkItemStore {

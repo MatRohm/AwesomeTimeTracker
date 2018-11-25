@@ -1,5 +1,5 @@
-import { IWorkItem } from '../../Shared/BusinessModel/IWorkItem';
 import { workItemStore } from '../../shared/Store';
+import { IWorkItem } from '../../shared/businessModell/IWorkItem';
 
 export class CurrentWorkItemService {
 
