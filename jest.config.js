@@ -1,4 +1,4 @@
-// copied from https://basarat.gitbooks.io/typescript/docs/testing/jest.html 
+// FROM: https://basarat.gitbooks.io/typescript/docs/testing/jest.html 
 
 module.exports = {
   "roots": [
