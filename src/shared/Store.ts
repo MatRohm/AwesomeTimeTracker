@@ -1,6 +1,7 @@
 // follow https://github.com/louischatriot/nedb for further information
 import * as Nedb from 'nedb';
 import { IWorkItem, WorkItem } from './WorkItem';
+import { ArgumentUtility } from './ArgumentUtility';
 
 class NeDBStore implements IWorkItemStore {
   GetWorkItemsByName(workItemName: string): Set<IWorkItem> {
@@ -36,6 +37,9 @@ class NeDBStore implements IWorkItemStore {
   }
 
   public SaveWorkItem(workItem: IWorkItem): void {
+    ArgumentUtility.CheckNotNullAndNotUndefined("workItem", workItem);
+    ArgumentUtility.CheckNotNullAndNotUndefined("workItem.name", workItem.name);
+
     var documentToInsert = {
       name: workItem.name,
     }
