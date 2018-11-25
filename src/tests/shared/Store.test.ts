@@ -1,6 +1,6 @@
-import { NeDBStore } from '../shared/Store';
-import { WorkItem } from '../shared/WorkItem';
 import * as Nedb from 'nedb';
+import { NeDBStore } from '../../shared/Store';
+import { WorkItem } from '../../shared/WorkItem';
 
 var _nedbStore: NeDBStore;
 var _nodeExprDB: Nedb;
