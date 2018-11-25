@@ -3,7 +3,7 @@ import * as Nedb from 'nedb';
 import { IWorkItem, WorkItem } from './WorkItem';
 import { ArgumentUtility } from './ArgumentUtility';
 
-class NeDBStore implements IWorkItemStore {
+export class NeDBStore implements IWorkItemStore {
   GetWorkItemsByName(workItemName: string): Set<IWorkItem> {
     let returnSet = new Set();
     let myQuery = `/${workItemName}/`;
@@ -20,7 +20,7 @@ class NeDBStore implements IWorkItemStore {
     return returnSet;
   }
 
-  public static GetWorkItemStore(): IWorkItemStore {
+  public static GetDefault(): IWorkItemStore {
     if (this.workItemInstance == null) {
       this.workItemInstance = new NeDBStore();
     }
@@ -31,9 +31,15 @@ class NeDBStore implements IWorkItemStore {
   private static workItemInstance: IWorkItemStore;
   private _workItemDatabase: Nedb;
 
-  private constructor() {
-    this._workItemDatabase = new Nedb('./workItemDatabase.db');
-    this._workItemDatabase.loadDatabase();
+  public constructor(nedb?: Nedb) {
+    if (nedb) {
+      this._workItemDatabase = nedb;
+      this._workItemDatabase.loadDatabase();
+    }
+    else {
+      this._workItemDatabase = new Nedb('./workItemDatabase.db');
+      this._workItemDatabase.loadDatabase();
+    }
   }
 
   public SaveWorkItem(workItem: IWorkItem): void {
@@ -53,5 +59,5 @@ interface IWorkItemStore {
   GetWorkItemsByName(name: string): Set<IWorkItem>
 }
 
-const workItemStore = NeDBStore.GetWorkItemStore();
+const workItemStore = NeDBStore.GetDefault();
 export { workItemStore };
