@@ -1,29 +1,28 @@
 import * as Nedb from 'nedb';
 import { NeDBStore } from '../../shared/Store';
-import { WorkItem } from '../../shared/WorkItem';
+import { WorkItem } from '../../Shared/BusinessModel/WorkItem';
 
-var _nedbStore: NeDBStore;
-var _nodeExprDB: Nedb;
+let _nedbStore: NeDBStore;
+let _nodeExprDB: Nedb;
 
 describe('Integration test: GetWorkItemsByName', () => {
   beforeEach(() => {
     _nodeExprDB = new Nedb('./workItemDatabase.test.db');
     _nedbStore = new NeDBStore(_nodeExprDB);
-  })
+  });
 
   afterEach(() => {
-    _nodeExprDB.remove({}, { multi: true }, function (err, numRemoved) {
-      _nodeExprDB.loadDatabase(function (err) {
-      });
+    _nodeExprDB.remove({}, { multi: true }, (err, numRemoved) => {
+      _nodeExprDB.loadDatabase();
     });
   });
 
   it('When given null, returns all defined values', () => {
-    let values = _nedbStore.GetWorkItemsByName(null);
+    const values = _nedbStore.GetWorkItemsByName(null);
   });
 
   it('When given "ABC" returns all worklogs with "ABC" in its name', () => {
-    let values = _nedbStore.GetWorkItemsByName('ABC');
+    const values = _nedbStore.GetWorkItemsByName('ABC');
   });
 });
 
@@ -31,17 +30,13 @@ describe('Integration test: SaveWorkItem', () => {
   beforeEach(() => {
     _nodeExprDB = new Nedb('./workItemDatabase.test.db');
     _nedbStore = new NeDBStore(_nodeExprDB);
-  })
+  });
 
   afterEach(() => {
-    _nodeExprDB.remove({}, { multi: true }, function (err, numRemoved) {
-      _nodeExprDB.loadDatabase(function (err) {
-      });
+    _nodeExprDB.remove({}, { multi: true }, (err, numRemoved) => {
+      _nodeExprDB.loadDatabase();
     });
   });
-  afterAll(() => {
-    // TODO: delete database
-  })
 
   it('When given null throws exceptions', () => {
     expect(() => _nedbStore.SaveWorkItem(null)).toThrowError();
@@ -52,13 +47,13 @@ describe('Integration test: SaveWorkItem', () => {
   });
 
   it('When given a workitem with null name, throws excpetion', () => {
-    let workitem = new WorkItem();
+    const workitem = new WorkItem();
     expect(() => _nedbStore.SaveWorkItem(workitem)).toThrowError();
   });
 
   it('When given a workitem stores it into database', () => {
-    let workitem = new WorkItem();
-    const itemName = "Testitem"
+    const workitem = new WorkItem();
+    const itemName = 'Testitem';
 
     workitem.name = itemName;
     _nedbStore.SaveWorkItem(workitem);

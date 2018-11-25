@@ -34,6 +34,9 @@
         "no-console": false,
         "object-literal-sort-keys": false,
         "trailing-comma": false,
+        "member-access": [true, "check-accessor"],
+        "ordered-imports": false,
+        "variable-name":false
     },
     "rulesDirectory": []
 }

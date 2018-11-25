@@ -1,4 +1,4 @@
-import { IWorkItem } from '../../shared/WorkItem';
+import { IWorkItem } from '../../Shared/BusinessModel/IWorkItem';
 import { workItemStore } from '../../shared/Store';
 
 export class CurrentWorkItemService {
@@ -16,7 +16,7 @@ export class CurrentWorkItemService {
 
   public GetWorkItems(name: string): Set<IWorkItem> {
     console.log('INPUT: ' + name);
-    var items = workItemStore.GetWorkItemsByName(name);
+    const items = workItemStore.GetWorkItemsByName(name);
     return null;
   }
 }
