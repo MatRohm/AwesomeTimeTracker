@@ -1,6 +1,7 @@
 # Application specific
 _package/**
 _app/**
+*.db
 
 # User-specific stuff
 .idea/**/workspace.xml
