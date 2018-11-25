@@ -1,7 +1,13 @@
 export class ArgumentUtility {
-  public static CheckNotNullAndNotUndefined(valueName: string, value: object): void {
-    if (value == null || value === undefined) {
-      throw new Error(`Argument '${valueName}' is NULL or UNDEFINEd`);
+  public static CheckNotNullAndNotUndefined(argumentName: string, argumentValue: any): void {
+    if (argumentValue == null || argumentValue === undefined) {
+      throw new ArgumentNullError(argumentName);
     }
+  }
+}
+
+export class ArgumentNullError extends Error {
+  constructor(argumentName: string) {
+    super(`Argument '${argumentName}' is NULL or UNDEFINED`);
   }
 }
