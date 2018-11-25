@@ -40,6 +40,18 @@
     "windows": {
       "program": "${workspaceFolder}/node_modules/jest/bin/jest",
     }
+
   },
+  { //FROM: https://github.com/Microsoft/vscode-recipes/tree/master/debugging-jest-tests
+    "type": "node",
+    "request": "launch",
+    "name": "Jest Current File",
+    "program": "${workspaceFolder}/node_modules/.bin/jest",
+    "args": ["${relativeFile}"],
+    "console": "integratedTerminal",
+    "internalConsoleOptions": "neverOpen",
+    "windows": {
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+    }
   ]
 }
