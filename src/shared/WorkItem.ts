@@ -12,7 +12,16 @@ export interface IWorkLog {
 }
 
 export class WorkItem implements IWorkItem {
-  public name: string;
+  private _name: string;
+
+  public get name(): string {
+    return this._name;
+  }
+
+  public set name(value: string) {
+    this._name = value;
+  }
+
   public worklogs: Collections.Set<IWorkLog>;
   public getWorkedTime(): string {
     let sumOfMilliSeconds: number;
