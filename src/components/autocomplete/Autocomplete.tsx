@@ -36,16 +36,14 @@ export default class Autocomplete extends React.Component<ReactComponentWrapper<
   }
 
   private renderAutocompleteEntries(): JSX.Element[] {
-    if (this.state.entries && this.state.entries.length > 0) {
-      return this.state.entries.map((entry) => <li key={entry.id}
-        onClick={(e) => {
-          this.setState({
-            inputValue: e.currentTarget.innerHTML
-          });
+    const hasEntries = this.state.entries && this.state.entries.length > 0;
 
-        }}
-      >{entry.name}</li>);
+    if (hasEntries) {
+      return this.state.entries.map((entry) => this.renderAutocompleteEntry(entry));
     }
+  }
 
+  private renderAutocompleteEntry(entry: AutoCompleteEntry): JSX.Element {
+    return <li key={entry.id} onClick={e => this.setState({ inputValue: e.currentTarget.innerHTML })}>{entry.name}</li>;
   }
 }
