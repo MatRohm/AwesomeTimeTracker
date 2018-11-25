@@ -1,0 +1,14 @@
+.currentWorkItemContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.currentWorkItem{
+  display: inline-block;
+  flex:1;
+}
+
+.currentWorkItemLabel{
+  margin-right: 10px;
+}

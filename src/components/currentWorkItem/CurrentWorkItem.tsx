@@ -1,11 +1,18 @@
 import * as React from 'react';
-import { serviceInstance } from './CurrentWorkItemService';
+import Autocomplete from '../autocomplete/Autocomplete';
+import { Shoes } from './Shoes';
+import IDataSource from '../autocomplete/IDataSource';
+import { ReactComponentWrapper } from './ReactComponentWrapper';
 
 export default class CurrentWorkItem extends React.Component {
 
   public render() {
+
+    const autoCompleteDataSource: IDataSource = new Shoes();
+    console.log('autoCompleteDataSource', autoCompleteDataSource);
+
     return <div>
-      <span>Current Item: </span> <input type='text' onInput={e => serviceInstance.GetWorkItems(e.currentTarget.value)}></input>
+      <span>Current Item: </span> <Autocomplete {...new ReactComponentWrapper<IDataSource>(autoCompleteDataSource)}></Autocomplete>
     </div >;
   }
 }
