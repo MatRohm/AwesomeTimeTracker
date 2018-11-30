@@ -2,7 +2,6 @@ import { workItemStore } from '../../shared/Store';
 import { IWorkItem } from '../../shared/businessModell/IWorkItem';
 
 export class CurrentWorkItemService {
-
   public static GetInstance(): CurrentWorkItemService {
     if (this.instance == null) {
       this.instance = new CurrentWorkItemService();

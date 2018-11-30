@@ -12,7 +12,7 @@ export default class CurrentWorkItem extends React.Component {
     console.log('autoCompleteDataSource', autoCompleteDataSource);
 
     return <div>
-      <span>Current Item: </span> <Autocomplete {...new ReactComponentWrapper<IAutocompleteDataSource>(autoCompleteDataSource)}></Autocomplete>
+      <Autocomplete {...new ReactComponentWrapper<IAutocompleteDataSource>(autoCompleteDataSource)} />
     </div >;
   }
 }

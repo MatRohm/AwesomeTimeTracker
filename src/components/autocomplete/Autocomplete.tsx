@@ -3,14 +3,15 @@ import IAutocompleteDataSource from './IAutocompleteDataSource';
 import { AutocompleteService } from './AutocompleteService';
 import AutoCompleteEntry from './AutoCompleteEntry';
 import { ReactComponentWrapper } from '../currentWorkItem/ReactComponentWrapper';
+import './Autocomplete.css';
 
-export default class Autocomplete extends React.Component<ReactComponentWrapper<IAutocompleteDataSource>, { inputValue: string, entries: AutoCompleteEntry[] }> {
+export default class Autocomplete extends React.Component<{ dataSource: IAutocompleteDataSource }, { inputValue: string, entries: AutoCompleteEntry[] }> {
   private _service: AutocompleteService;
 
-  constructor(props: ReactComponentWrapper<IAutocompleteDataSource>) {
+  constructor(props: { dataSource: IAutocompleteDataSource }) {
     super(props);
     console.log('props', props);
-    this._service = new AutocompleteService(props.wrappedObject);
+    this._service = new AutocompleteService(props.dataSource);
     this.state = {
       inputValue: '',
       entries: []
@@ -18,13 +19,14 @@ export default class Autocomplete extends React.Component<ReactComponentWrapper<
   }
 
   public render() {
-    return <div>
+    return <div className='autocompleteContainer'>
+      <label htmlFor='autocomplete' className='autocompleteLabel'>Label: </label>
       <input type='text' placeholder='Start typing text...' onInput={e => this.searchEntries(e.currentTarget.value)} value={this.state.inputValue} onChange={(e) => {
         this.setState({
           inputValue: e.currentTarget.value
         });
-      }} />
-      <ul>
+      }} className='autocompleteInput' id='autocompleteInput' />
+      <ul className='autocompleteEntryContainer'>
         {this.renderAutocompleteEntries()}
       </ul>
     </div>;
@@ -44,6 +46,6 @@ export default class Autocomplete extends React.Component<ReactComponentWrapper<
   }
 
   private renderAutocompleteEntry(entry: AutoCompleteEntry): JSX.Element {
-    return <li key={entry.id} onClick={e => this.setState({ inputValue: e.currentTarget.innerHTML })}>{entry.name}</li>;
+    return <li className='autocompleteEntry' key={entry.id} onClick={e => this.setState({ inputValue: e.currentTarget.innerHTML, entries: [] })}>{entry.name}</li>;
   }
 }

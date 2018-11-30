@@ -4,6 +4,9 @@
     "max-empty-lines" : 1,
     "rule-empty-line-before": ["always"],
     "string-quotes": "single",
-    "comment-no-empty": true
+    "comment-no-empty": true,
+    "declaration-block-trailing-semicolon": "always",
+    "at-rule-semicolon-newline-after": "always",
+    "at-rule-name-case": "lower"
   }
 }
