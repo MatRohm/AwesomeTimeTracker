@@ -28,9 +28,24 @@ describe('Test if autocomplete renders correctly', () => {
 
   it('When a text is given, entries are shown', () => {
     const ac = getAutocomplete();
+
     const simulateEventArgs = { currentTarget: { value: 'test' } };
     ac.find('input').simulate('input', simulateEventArgs);
+
     const countOfListEntries = ac.find('ul > li').length;
     expect(countOfListEntries).toBe(1);
   });
+
+  it('When a text is given then removed, no entries are shown', () => {
+    const ac = getAutocomplete();
+    const simulateEventArgs = { currentTarget: { value: 'test' } };
+    ac.find('input').simulate('input', simulateEventArgs);
+
+    simulateEventArgs.currentTarget.value = '';
+    ac.find('input').simulate('input', simulateEventArgs);
+
+    const countOfListEntries = ac.find('ul > li').length;
+    expect(countOfListEntries).toBe(0);
+  });
+
 });
