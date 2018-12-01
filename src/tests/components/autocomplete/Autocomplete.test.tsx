@@ -46,5 +46,4 @@ describe('Test if autocomplete renders correctly', () => {
     const countOfListEntries = ac.find('ul > li').length;
     expect(countOfListEntries).toBe(0);
   });
-
 });
