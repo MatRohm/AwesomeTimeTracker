@@ -23,6 +23,10 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
     this._inputText = React.createRef();
   }
 
+  public componentDidMount() {
+    this._autocompleteEntryContainer.current.style.display = 'none';
+  }
+
   public render() {
     return <div className='autocompleteContainer'>
 
@@ -30,17 +34,21 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
         ref={this._inputText}
         type='text'
         placeholder='Start typing text...'
-        onChange={this.handleOnchange.bind(this)}
+        onChange={this.onChange.bind(this)}
         value={this.state.inputValue}
-        className='autocompleteInput' id='autocompleteInput' />
+        className='autocompleteInput'
+        id='autocompleteInput' />
 
-      <ul className='autocompleteEntryContainer' ref={this._autocompleteEntryContainer}>
+      <ul
+        className='autocompleteEntryContainer'
+        ref={this._autocompleteEntryContainer}>
+
         {this.renderAutocompleteEntries()}
       </ul>
-    </div>;
+    </div >;
   }
 
-  private handleOnchange(eventArgs: React.ChangeEvent<HTMLInputElement>) {
+  private onChange(eventArgs: React.ChangeEvent<HTMLInputElement>) {
     const searchText = eventArgs.target.value;
     const entries = this._service.searchEntries(searchText);
     this.setState({ inputValue: searchText, entries });
@@ -51,7 +59,7 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
 
     if (hasEntries) {
       this.calculatePosition();
-
+      this._autocompleteEntryContainer.current.style.display = 'block';
       return this.state.entries.map((entry) => this.renderAutocompleteEntry(entry));
     }
   }
@@ -67,13 +75,15 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
     return <li
       className='autocompleteEntry'
       key={entry.id}
-      onClick={this.handleOnClick.bind(this)}>
+      onClick={this.onClick.bind(this)}>
+
       {entry.name}
     </li>;
   }
 
-  private handleOnClick(eventArgs: React.MouseEvent<HTMLLIElement>) {
+  private onClick(eventArgs: React.MouseEvent<HTMLLIElement>) {
     const value = eventArgs.currentTarget.innerHTML;
+    this._autocompleteEntryContainer.current.style.display = 'none';
     this.setState({ inputValue: value, entries: [] });
   }
 }
