@@ -52,8 +52,8 @@ describe('Test if autocomplete renders correctly', () => {
     const inputField = autocomplete.find('input');
 
     // Act
-    const simulateEventArgs = { target: { value: 'test' } };
-    inputField.simulate('change', simulateEventArgs);
+    const simulatedEventArgs = { target: { value: 'test' } };
+    inputField.simulate('change', simulatedEventArgs);
 
     // Assert
     const countOfListEntries = autocomplete.find('ul > li').length;
@@ -65,11 +65,11 @@ describe('Test if autocomplete renders correctly', () => {
     const ac = getOrCreateAutocomplete();
 
     // Act
-    const simulateEventArgs = { target: { value: 'test' } };
-    ac.find('input').simulate('change', simulateEventArgs);
+    const simulatedEventArgs = { target: { value: 'test' } };
+    ac.find('input').simulate('change', simulatedEventArgs);
 
-    simulateEventArgs.target.value = '';
-    ac.find('input').simulate('change', simulateEventArgs);
+    simulatedEventArgs.target.value = '';
+    ac.find('input').simulate('change', simulatedEventArgs);
 
     // Assert
     const countOfListEntries = ac.find('ul > li').length;
@@ -79,10 +79,10 @@ describe('Test if autocomplete renders correctly', () => {
   it('When an entry is clicked its text is written to the input box and the entries are removed', () => {
     // Arrange
     const ac = getOrCreateAutocomplete();
-    const simulateEventArgs = { target: { value: 't' } };
-    ac.find('input').simulate('change', simulateEventArgs);
 
     // Act
+    const simulatedEventArgs = { target: { value: 't' } };
+    ac.find('input').simulate('change', simulatedEventArgs);
     ac.find('ul > li').simulate('click');
 
     // Assert
