@@ -1,19 +1,6 @@
 .autocompleteContainer{
   display: grid;
-  grid-template-areas: 
-    'autocompleteLabel autocompleteInput'
-    'autocompleteLabel entryContainer';
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.autocompleteLabel{
-  margin-right:10px;
-  grid-area: 'autocompleteLabel';
-}
-
-.autocompleteInput{
-  grid-area: 'autocompleteInput';
+  position: relative;
 }
 
 .autocompleteEntry {
@@ -22,6 +9,14 @@
   border-bottom: 1px solid lightgrey;
 }
 
+.autocompleteEntry:hover {
+  background-color: indigo;
+}
+
 .autocompleteEntryContainer{
-  grid-area: 'entryContainer';
+  grid-area: entryContainer;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  position: absolute;
 }

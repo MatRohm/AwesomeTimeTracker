@@ -25,4 +25,5 @@ module.exports = {
   'snapshotSerializers': ['enzyme-to-json/serializer'],
   'setupFiles': ['./src/tests/Setup.ts'],
   'testPathIgnorePatterns': ['node_modules'],
+  'testEnvironment': 'jest-environment-jsdom',
 };

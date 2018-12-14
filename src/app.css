@@ -5,8 +5,8 @@
 
 .root {
   display: grid;
-  grid-template-columns: 20% auto;
-  grid-template-rows: 20% auto 10%;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
   grid-template-areas: 
     'header header header header header header'
     'menu mainContent mainContent mainContent mainContent mainContent'

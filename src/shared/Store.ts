@@ -20,7 +20,7 @@ export class NeDBStore implements IWorkItemStore {
   private _workItemDatabase: Nedb;
 
   public constructor(nedb: Nedb) {
-    ArgumentUtility.CheckNotNullAndNotUndefined('nedb', nedb);
+    ArgumentUtility.CheckDefined('nedb', nedb);
 
     this._workItemDatabase = nedb;
     this._workItemDatabase.loadDatabase();
@@ -42,8 +42,8 @@ export class NeDBStore implements IWorkItemStore {
   }
 
   public SaveWorkItem(workItem: IWorkItem): void {
-    ArgumentUtility.CheckNotNullAndNotUndefined('workItem', workItem);
-    ArgumentUtility.CheckNotNullAndNotUndefined('workItem.name', workItem.name);
+    ArgumentUtility.CheckDefined('workItem', workItem);
+    ArgumentUtility.CheckDefined('workItem.name', workItem.name);
 
     const documentToInsert = {
       name: workItem.name,

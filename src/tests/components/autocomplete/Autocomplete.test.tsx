@@ -1,4 +1,4 @@
-import { mount, shallow, ShallowWrapper } from 'enzyme';
+import { mount, shallow, ShallowWrapper, render } from 'enzyme';
 import Autocomplete from '../../../components/autocomplete/Autocomplete';
 import * as React from 'react';
 import IAutocompleteDataSource from '../../../components/autocomplete/IAutocompleteDataSource';
@@ -6,17 +6,21 @@ import * as TypeMoq from 'typemoq';
 import AutoCompleteEntry from '../../../components/autocomplete/AutoCompleteEntry';
 
 describe('Test if autocomplete renders correctly', () => {
-  let autocomplete: ShallowWrapper<any, any, Autocomplete>;
+  let _autocomplete: any;
 
   const getOrCreateAutocomplete = () => {
-    if (!autocomplete) {
+    if (!_autocomplete) {
       const mock = TypeMoq.Mock.ofType<IAutocompleteDataSource>();
-      mock.setup(o => o.GetEntries(null)).returns(() => []);
-      mock.setup(o => o.GetEntries('test')).returns(() => [new AutoCompleteEntry('1', 'test')]);
-      autocomplete = shallow(<Autocomplete dataSource={mock.object} />);
+      mock.setup(o => o.GetEntries('test')).returns(() => {
+        return [new AutoCompleteEntry('1', 'test')];
+      });
+
+      const div = document.createElement('div');
+      _autocomplete = mount(<Autocomplete dataSource={mock.object} />);
+      _autocomplete.setProps(mock);
     }
 
-    return autocomplete;
+    return _autocomplete;
   };
 
   it('When no text is given no entries are shown', () => {
@@ -26,22 +30,23 @@ describe('Test if autocomplete renders correctly', () => {
   });
 
   it('When a text is given entries are shown', () => {
-    const ac = getOrCreateAutocomplete();
+    const autocomplete = getOrCreateAutocomplete();
 
-    const simulateEventArgs = { currentTarget: { value: 'test' } };
-    ac.find('input').simulate('input', simulateEventArgs);
+    const simulateEventArgs = { target: { value: 'test' } };
+    const inputField = autocomplete.find('input');
+    inputField.value = 'IRGENDWAS!!!';
+    inputField.simulate('change', simulateEventArgs);
 
-    const countOfListEntries = ac.find('ul > li').length;
+    const countOfListEntries = autocomplete.find('ul > li').length;
     expect(countOfListEntries).toBe(1);
   });
 
   it('When a text is given then removed, no entries are shown', () => {
     const ac = getOrCreateAutocomplete();
     const simulateEventArgs = { currentTarget: { value: 'test' } };
-    ac.find('input').simulate('input', simulateEventArgs);
 
     simulateEventArgs.currentTarget.value = '';
-    ac.find('input').simulate('input', simulateEventArgs);
+    ac.find('input').simulate('change', simulateEventArgs);
 
     const countOfListEntries = ac.find('ul > li').length;
     expect(countOfListEntries).toBe(0);
