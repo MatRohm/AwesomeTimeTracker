@@ -1,4 +1,4 @@
-import * as Nedb from 'nedb';
+import Nedb from 'nedb';
 import { NeDBStore } from '../../shared/Store';
 import { WorkItem } from '../../shared/businessModell/WorkItem';
 

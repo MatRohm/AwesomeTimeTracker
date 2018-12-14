@@ -1,5 +1,5 @@
 // follow https://github.com/louischatriot/nedb for further information
-import * as Nedb from 'nedb';
+import Nedb from 'nedb';
 import { ArgumentUtility } from './Arguments/ArgumentUtility';
 import { IWorkItemStore } from './IWorkItemStore';
 import { IWorkItem } from './businessModell/IWorkItem';

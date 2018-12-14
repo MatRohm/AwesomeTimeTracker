@@ -13,7 +13,6 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
   constructor(props: { dataSource: IAutocompleteDataSource }) {
     super(props);
     ArgumentUtility.CheckDefined('props.dataSource', props.dataSource);
-    console.log('props', props);
     this._service = new AutocompleteService(props.dataSource);
     this.state = {
       inputValue: '',
