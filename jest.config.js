@@ -26,4 +26,9 @@ module.exports = {
   'setupFiles': ['./src/tests/Setup.ts'],
   'testPathIgnorePatterns': ['node_modules'],
   'testEnvironment': 'jest-environment-jsdom',
+  globals: {
+    'ts-jest': {
+      diagostics: false,
+    },
+  },
 };
