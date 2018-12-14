@@ -74,6 +74,6 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
 
   private handleOnClick(eventArgs: React.MouseEvent<HTMLLIElement>) {
     const value = eventArgs.currentTarget.innerHTML;
-    this.setState({ inputValue: value });
+    this.setState({ inputValue: value, entries: [] });
   }
 }
