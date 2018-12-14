@@ -7,13 +7,14 @@ import AutoCompleteEntry from '../../../components/autocomplete/AutoCompleteEntr
 
 describe('Test if autocomplete renders correctly', () => {
   let _autocomplete: any;
+
   const _entrySelector = '.autocompleteEntry';
   const _inputSelector = '.autocompleteInput';
   const _entryContainerSelector = '.autocompleteEntryContainer';
 
-  function enterTextIntoInput(ac: any, value: string) {
+  function enterTextIntoInput(value: string) {
     const simulatedEventArgs = { target: { value } };
-    ac.find(_inputSelector).simulate('change', simulatedEventArgs);
+    _autocomplete.find(_inputSelector).simulate('change', simulatedEventArgs);
   }
 
   function createDataSourceMock() {
@@ -33,7 +34,7 @@ describe('Test if autocomplete renders correctly', () => {
     return mock;
   }
 
-  function assertEntryContainerDisplayProperty(_autocomplete: any, value: string) {
+  function assertEntryContainerDisplayProperty(value: string) {
     // This is a workaround: the problem is when style is set over React Ref the value
     // doesnt show up the enzyme react wrapper. Which is unfortunate but cant be changed at the moment
 
@@ -64,7 +65,7 @@ describe('Test if autocomplete renders correctly', () => {
 
   it('When a text is given entries are shown', () => {
     // Act
-    enterTextIntoInput(_autocomplete, 'test');
+    enterTextIntoInput('test');
 
     // Assert
     const countOfListEntries = _autocomplete.find(_entrySelector).length;
@@ -73,8 +74,8 @@ describe('Test if autocomplete renders correctly', () => {
 
   it('When a text is given then removed, no entries are shown', () => {
     // Act
-    enterTextIntoInput(_autocomplete, 'test');
-    enterTextIntoInput(_autocomplete, '');
+    enterTextIntoInput('test');
+    enterTextIntoInput('');
 
     // Assert
     const countOfListEntries = _autocomplete.find(_entrySelector).length;
@@ -83,7 +84,7 @@ describe('Test if autocomplete renders correctly', () => {
 
   it('When an entry is clicked its text is written to the input box and the entries are removed', () => {
     // Act
-    enterTextIntoInput(_autocomplete, 't');
+    enterTextIntoInput('t');
     _autocomplete.find(_entrySelector).simulate('click');
 
     // Assert
@@ -96,23 +97,23 @@ describe('Test if autocomplete renders correctly', () => {
 
   it('At the beginning entryContainer is not shown', () => {
     // Assert
-    assertEntryContainerDisplayProperty(_autocomplete, 'none');
+    assertEntryContainerDisplayProperty('none');
   });
 
   it('When a text is entered but no entry is found no entryContainer is shown', () => {
     // Act
-    enterTextIntoInput(_autocomplete, 'nonFound');
+    enterTextIntoInput('nonFound');
 
     // Assert
-    assertEntryContainerDisplayProperty(_autocomplete, 'none');
+    assertEntryContainerDisplayProperty('none');
   });
 
   it('When a text is entered and an entry is found the entryContainer is shown', () => {
     // Act
-    enterTextIntoInput(_autocomplete, 'test');
+    enterTextIntoInput('test');
 
     // Assert
-    assertEntryContainerDisplayProperty(_autocomplete, 'block');
+    assertEntryContainerDisplayProperty('block');
   });
 
 });
