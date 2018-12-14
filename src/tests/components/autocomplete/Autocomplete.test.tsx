@@ -8,21 +8,30 @@ import AutoCompleteEntry from '../../../components/autocomplete/AutoCompleteEntr
 describe('Test if autocomplete renders correctly', () => {
   let _autocomplete: any;
 
-  const getOrCreateAutocomplete = () => {
+  function getOrCreateAutocomplete() {
     if (!_autocomplete) {
-      const mock = TypeMoq.Mock.ofType<IAutocompleteDataSource>();
-      mock.setup(o => o.GetEntries('test')).returns(() => {
-        return [new AutoCompleteEntry('1', 'test')];
-      });
+      const dataSourceMock = createDataSourceMock();
 
-      const div = document.createElement('div');
-      _autocomplete = mount(<Autocomplete dataSource={mock.object} />);
-      _autocomplete.setProps(mock);
+      _autocomplete = mount(<Autocomplete dataSource={dataSourceMock.object} />);
+      _autocomplete.setProps(dataSourceMock);
     }
 
     return _autocomplete;
-  };
+  }
 
+  function createDataSourceMock() {
+    const mock = TypeMoq.Mock.ofType<IAutocompleteDataSource>();
+
+    mock.setup(o => o.GetEntries('test')).returns(() => {
+      return [new AutoCompleteEntry('1', 'test')];
+    });
+
+    mock.setup(o => o.GetEntries('t')).returns(() => {
+      return [new AutoCompleteEntry('1', 'test')];
+    });
+
+    return mock;
+  }
   it('When no text is given no entries are shown', () => {
     const ac = getOrCreateAutocomplete();
     const countOfListEntries = ac.find('ul > li').length;
@@ -43,12 +52,23 @@ describe('Test if autocomplete renders correctly', () => {
 
   it('When a text is given then removed, no entries are shown', () => {
     const ac = getOrCreateAutocomplete();
-    const simulateEventArgs = { currentTarget: { value: 'test' } };
+    const simulateEventArgs = { target: { value: 'test' } };
+    ac.find('input').simulate('change', simulateEventArgs);
 
-    simulateEventArgs.currentTarget.value = '';
+    simulateEventArgs.target.value = '';
     ac.find('input').simulate('change', simulateEventArgs);
 
     const countOfListEntries = ac.find('ul > li').length;
     expect(countOfListEntries).toBe(0);
+  });
+
+  it('When an entry is clicked its text is written to the input box', () => {
+    const ac = getOrCreateAutocomplete();
+    const simulateEventArgs = { target: { value: 't' } };
+    ac.find('input').simulate('change', simulateEventArgs);
+
+    ac.find('ul > li').simulate('click');
+    const textOfInput = ac.find('input').props().value;
+    expect(textOfInput).toBe('test');
   });
 });

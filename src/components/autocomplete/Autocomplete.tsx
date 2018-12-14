@@ -31,7 +31,7 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
         ref={this._inputText}
         type='text'
         placeholder='Start typing text...'
-        onChange={e => this.handleOnchange(e)}
+        onChange={this.handleOnchange.bind(this)}
         value={this.state.inputValue}
         className='autocompleteInput' id='autocompleteInput' />
 
@@ -44,7 +44,7 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
   private handleOnchange(eventArgs: React.ChangeEvent<HTMLInputElement>) {
     const searchText = eventArgs.target.value;
     const entries = this._service.searchEntries(searchText);
-    this.setState({ entries });
+    this.setState({ inputValue: searchText, entries });
   }
 
   private renderAutocompleteEntries(): JSX.Element[] {
@@ -65,6 +65,16 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
   }
 
   private renderAutocompleteEntry(entry: AutoCompleteEntry): JSX.Element {
-    return <li className='autocompleteEntry' key={entry.id} onClick={e => this.setState({ inputValue: e.currentTarget.innerHTML, entries: [] })}>{entry.name}</li>;
+    return <li
+      className='autocompleteEntry'
+      key={entry.id}
+      onClick={this.handleOnClick.bind(this)}>
+      {entry.name}
+    </li>;
+  }
+
+  private handleOnClick(eventArgs: React.MouseEvent<HTMLLIElement>) {
+    const value = eventArgs.currentTarget.innerHTML;
+    this.setState({ inputValue: value });
   }
 }
