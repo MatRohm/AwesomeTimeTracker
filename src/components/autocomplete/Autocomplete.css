@@ -5,12 +5,13 @@
 
 .autocompleteEntry {
   list-style-type: none;
-  background-color: aquamarine;
-  border-bottom: 1px solid lightgrey;
+  background-color: white;
+  padding: 2px;
 }
 
 .autocompleteEntry:hover {
-  background-color: indigo;
+  background-color: lightgray;
+  font-weight: 600;
 }
 
 .autocompleteEntryContainer{
@@ -19,4 +20,6 @@
   padding: 0px;
   list-style: none;
   position: absolute;
+  border: 1px solid black;
+  width: 100%;
 }
