@@ -69,4 +69,16 @@ export class AutoCompleteTestsWrapper {
     const textOfInput = this._autocomplete.find(this._inputSelector).props().value;
     return textOfInput.toString();
   }
+
+  public getDataItemIdOfTextBox(): string {
+    const props: any = this._autocomplete.find(this._inputSelector).props();
+    const value = props['data-selected-id'];
+    return value.toString();
+  }
+
+  public getDataItemIdOfEntry(zeroBasedIndex: number): string {
+    const props: any = this._autocomplete.find(this._entrySelector).get(zeroBasedIndex).props;
+    const value = props['data-selected-id'];
+    return value.toString();
+  }
 }

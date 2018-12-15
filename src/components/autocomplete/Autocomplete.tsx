@@ -36,7 +36,7 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
         placeholder='Start typing text...'
         onChange={this.onChange.bind(this)}
         value={this.state.inputValue.text}
-        data-item-id={this.state.inputValue.id}
+        data-selected-id={this.state.inputValue.id}
         className='autocompleteInput'
         id='autocompleteInput' />
 
@@ -77,7 +77,7 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
       className='autocompleteEntry'
       key={entry.id}
       onClick={this.onClick.bind(this)}
-      data-item-id={entry.id}>
+      data-selected-id={entry.id}>
 
       {entry.name}
     </li>;
@@ -85,7 +85,7 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
 
   private onClick(eventArgs: React.MouseEvent<HTMLLIElement>) {
     const text = eventArgs.currentTarget.innerHTML;
-    const id = eventArgs.currentTarget.getAttribute('data-item-id');
+    const id = eventArgs.currentTarget.getAttribute('data-selected-id');
 
     this._autocompleteEntryContainer.current.style.display = 'none';
     this.setState({ inputValue: { text, id }, entries: [] });

@@ -70,4 +70,43 @@ describe('Test if autocomplete renders correctly', () => {
     // Assert
     _autocomplete.assertEntryContainerDisplayProperty('block');
   });
+
+  it('When an entry is selected the data-selected-id attribute is filled', () => {
+    // Act
+    _autocomplete.enterTextIntoInput('t');
+    _autocomplete.clickFirstSerchResult();
+
+    // Assert
+    const selectedID = _autocomplete.getDataItemIdOfTextBox();
+    expect(selectedID).toBe('1');
+  });
+
+  it('When no text is entered data-selected-id does not have a value', () => {
+    // Assert
+    const selectedID = _autocomplete.getDataItemIdOfTextBox();
+    expect(selectedID).toBe('');
+  });
+
+  it('When an entry is selcted and then text is entered data-selected-id does not have a value', () => {
+    // Act
+    _autocomplete.enterTextIntoInput('t');
+    _autocomplete.clickFirstSerchResult();
+    _autocomplete.enterTextIntoInput('another value');
+
+    // Assert
+    const selectedID = _autocomplete.getDataItemIdOfTextBox();
+    expect(selectedID).toBe('');
+  });
+
+  it('All rendered entries do have an data-selected-id', () => {
+    // Act
+    _autocomplete.enterTextIntoInput('test');
+
+    // Assert
+    const IDofFirstEntry = _autocomplete.getDataItemIdOfEntry(0);
+    expect(IDofFirstEntry).toBe('1');
+
+    const IDofSecondEntry = _autocomplete.getDataItemIdOfEntry(1);
+    expect(IDofSecondEntry).toBe('2');
+  });
 });
