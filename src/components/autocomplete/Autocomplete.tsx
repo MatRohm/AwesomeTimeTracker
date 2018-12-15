@@ -5,7 +5,7 @@ import AutoCompleteEntry from './AutoCompleteEntry';
 import './Autocomplete.css';
 import { ArgumentUtility } from '../../shared/Arguments/ArgumentUtility';
 
-export default class Autocomplete extends React.Component<{ dataSource: IAutocompleteDataSource }, { inputValue: string, entries: AutoCompleteEntry[] }> {
+export default class Autocomplete extends React.Component<{ dataSource: IAutocompleteDataSource }, { inputValue: { text: string, id: string }, entries: AutoCompleteEntry[] }> {
   public _inputText: React.RefObject<HTMLInputElement>;
   private _service: AutocompleteService;
   private _autocompleteEntryContainer: React.RefObject<HTMLUListElement>;
@@ -15,7 +15,7 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
     ArgumentUtility.CheckDefined('props.dataSource', props.dataSource);
     this._service = new AutocompleteService(props.dataSource);
     this.state = {
-      inputValue: '',
+      inputValue: { text: '', id: '' },
       entries: []
     };
 
@@ -35,7 +35,8 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
         type='text'
         placeholder='Start typing text...'
         onChange={this.onChange.bind(this)}
-        value={this.state.inputValue}
+        value={this.state.inputValue.text}
+        data-item-id={this.state.inputValue.id}
         className='autocompleteInput'
         id='autocompleteInput' />
 
@@ -51,7 +52,7 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
   private onChange(eventArgs: React.ChangeEvent<HTMLInputElement>) {
     const searchText = eventArgs.target.value;
     const entries = this._service.searchEntries(searchText);
-    this.setState({ inputValue: searchText, entries });
+    this.setState({ inputValue: { text: searchText, id: '' }, entries });
   }
 
   private renderAutocompleteEntries(): JSX.Element[] {
@@ -75,15 +76,18 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
     return <li
       className='autocompleteEntry'
       key={entry.id}
-      onClick={this.onClick.bind(this)}>
+      onClick={this.onClick.bind(this)}
+      data-item-id={entry.id}>
 
       {entry.name}
     </li>;
   }
 
   private onClick(eventArgs: React.MouseEvent<HTMLLIElement>) {
-    const value = eventArgs.currentTarget.innerHTML;
+    const text = eventArgs.currentTarget.innerHTML;
+    const id = eventArgs.currentTarget.getAttribute('data-item-id');
+
     this._autocompleteEntryContainer.current.style.display = 'none';
-    this.setState({ inputValue: value, entries: [] });
+    this.setState({ inputValue: { text, id }, entries: [] });
   }
 }
