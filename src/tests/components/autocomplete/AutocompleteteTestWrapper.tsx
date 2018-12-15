@@ -76,9 +76,16 @@ export class AutoCompleteTestsWrapper {
     return value.toString();
   }
 
-  public getDataItemIdOfEntry(zeroBasedIndex: number): string {
-    const props: any = this._autocomplete.find(this._entrySelector).get(zeroBasedIndex).props;
-    const value = props['data-selected-id'];
-    return value.toString();
+  public getDataItemIDsOfEntries(): string[] {
+    const ids = new Array<string>();
+
+    this._autocomplete
+      .find(this._entrySelector)
+      .forEach(o => {
+        const props: any = o.props();
+        ids.push(props['data-selected-id']);
+      });
+
+    return ids;
   }
 }

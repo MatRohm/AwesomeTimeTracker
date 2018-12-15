@@ -103,10 +103,13 @@ describe('Test if autocomplete renders correctly', () => {
     _autocomplete.enterTextIntoInput('test');
 
     // Assert
-    const IDofFirstEntry = _autocomplete.getDataItemIdOfEntry(0);
-    expect(IDofFirstEntry).toBe('1');
+    const entries = _autocomplete.getDataItemIDsOfEntries();
+    expect(entries.length).toBeGreaterThan(0);
 
-    const IDofSecondEntry = _autocomplete.getDataItemIdOfEntry(1);
-    expect(IDofSecondEntry).toBe('2');
+    entries.forEach(element => {
+      expect(element).toBeDefined();
+      expect(element).not.toBeNull();
+      expect(element).not.toEqual('');
+    });
   });
 });
