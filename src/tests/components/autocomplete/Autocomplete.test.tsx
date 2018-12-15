@@ -1,119 +1,73 @@
-import { mount } from 'enzyme';
-import Autocomplete from '../../../components/autocomplete/Autocomplete';
-import * as React from 'react';
-import IAutocompleteDataSource from '../../../components/autocomplete/IAutocompleteDataSource';
-import * as TypeMoq from 'typemoq';
-import AutoCompleteEntry from '../../../components/autocomplete/AutoCompleteEntry';
+import { AutoCompleteTestsWrapper } from './AutocompleteteTestWrapper';
 
 describe('Test if autocomplete renders correctly', () => {
-  let _autocomplete: any;
-
-  const _entrySelector = '.autocompleteEntry';
-  const _inputSelector = '.autocompleteInput';
-  const _entryContainerSelector = '.autocompleteEntryContainer';
-
-  function enterTextIntoInput(value: string) {
-    const simulatedEventArgs = { target: { value } };
-    _autocomplete.find(_inputSelector).simulate('change', simulatedEventArgs);
-  }
-
-  function createDataSourceMock() {
-    const mock = TypeMoq.Mock.ofType<IAutocompleteDataSource>();
-
-    mock.setup(o => o.GetEntries('test')).returns(() => {
-      return [
-        new AutoCompleteEntry('1', 'test'),
-        new AutoCompleteEntry('2', 'second test')
-      ];
-    });
-
-    mock.setup(o => o.GetEntries('t')).returns(() => {
-      return [new AutoCompleteEntry('1', 'test')];
-    });
-
-    return mock;
-  }
-
-  function assertEntryContainerDisplayProperty(value: string) {
-    // This is a workaround: the problem is when style is set over React Ref the value of the style property itself
-    // doesnt gets added at the enzyme react wrapper. Which is unfortunate but cant be changed at the moment.
-
-    const displayOfEntryContainer = _autocomplete.find(_entryContainerSelector).html();
-    expect(displayOfEntryContainer).toContain('display: ' + value);
-  }
+  let _autocomplete: AutoCompleteTestsWrapper;
 
   beforeEach(() => {
-    const dataSourceMock = createDataSourceMock();
-
-    _autocomplete = mount(<Autocomplete dataSource={dataSourceMock.object} />);
-    _autocomplete.setProps(dataSourceMock);
+    _autocomplete = new AutoCompleteTestsWrapper();
   });
 
   afterEach(() => {
-    if (this._autocomplete) {
-      this._autocomplete.unMount();
-    }
+    _autocomplete.tryUnmount();
+    _autocomplete = null;
   });
 
   it('When no text is given no entries are shown', () => {
-    // Act
-    const countOfListEntries = _autocomplete.find(_entrySelector).length;
-
     // Assert
-    expect(countOfListEntries).toBe(0);
+    const count = _autocomplete.getFoundEntriesCount();
+    expect(count).toBe(0);
   });
 
   it('When a text is given entries are shown', () => {
     // Act
-    enterTextIntoInput('test');
+    _autocomplete.enterTextIntoInput('test');
 
     // Assert
-    const countOfListEntries = _autocomplete.find(_entrySelector).length;
-    expect(countOfListEntries).toBe(2);
+    const count = _autocomplete.getFoundEntriesCount();
+    expect(count).toBe(2);
   });
 
   it('When a text is given then removed, no entries are shown', () => {
     // Act
-    enterTextIntoInput('test');
-    enterTextIntoInput('');
+    _autocomplete.enterTextIntoInput('test');
+    _autocomplete.enterTextIntoInput('');
 
     // Assert
-    const countOfListEntries = _autocomplete.find(_entrySelector).length;
-    expect(countOfListEntries).toBe(0);
+    const count = _autocomplete.getFoundEntriesCount();
+    expect(count).toBe(0);
   });
 
   it('When an entry is clicked its text is written to the input box and the entries are removed', () => {
     // Act
-    enterTextIntoInput('t');
-    _autocomplete.find(_entrySelector).simulate('click');
+    _autocomplete.enterTextIntoInput('t');
+    _autocomplete.clickFirstSerchResult();
 
     // Assert
-    const textOfInput = _autocomplete.find(_inputSelector).props().value;
+    const textOfInput = _autocomplete.getTextOfTextBox();
     expect(textOfInput).toBe('test');
 
-    const numberOfEntries = _autocomplete.find(_entrySelector).length;
+    const numberOfEntries = _autocomplete.getFoundEntriesCount();
     expect(numberOfEntries).toBe(0);
   });
 
   it('At the beginning entryContainer is not shown', () => {
     // Assert
-    assertEntryContainerDisplayProperty('none');
+    _autocomplete.assertEntryContainerDisplayProperty('none');
   });
 
   it('When a text is entered but no entry is found no entryContainer is shown', () => {
     // Act
-    enterTextIntoInput('nonFound');
+    _autocomplete.enterTextIntoInput('nonFound');
 
     // Assert
-    assertEntryContainerDisplayProperty('none');
+    _autocomplete.assertEntryContainerDisplayProperty('none');
   });
 
   it('When a text is entered and an entry is found the entryContainer is shown', () => {
     // Act
-    enterTextIntoInput('test');
+    _autocomplete.enterTextIntoInput('test');
 
     // Assert
-    assertEntryContainerDisplayProperty('block');
+    _autocomplete.assertEntryContainerDisplayProperty('block');
   });
-
 });
