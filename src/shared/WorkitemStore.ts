@@ -5,17 +5,17 @@ import { IWorkItemStore } from './IWorkItemStore';
 import { IWorkItem } from './businessModell/IWorkItem';
 import { WorkItem } from './businessModell/WorkItem';
 
-export class NeDBStore implements IWorkItemStore {
+export class WorkitemStore implements IWorkItemStore {
   public static GetDefault(): IWorkItemStore {
-    if (this.workItemInstance == null) {
+    if (this.s_workItemInstance == null) {
       const workItemDatabase = new Nedb('./workItemDatabase.db');
-      this.workItemInstance = new NeDBStore(workItemDatabase);
+      this.s_workItemInstance = new WorkitemStore(workItemDatabase);
     }
 
-    return this.workItemInstance;
+    return this.s_workItemInstance;
   }
 
-  private static workItemInstance: IWorkItemStore;
+  private static s_workItemInstance: IWorkItemStore;
 
   private _workItemDatabase: Nedb;
 
@@ -25,6 +25,7 @@ export class NeDBStore implements IWorkItemStore {
     this._workItemDatabase = nedb;
     this._workItemDatabase.loadDatabase();
   }
+
   public GetWorkItemsByName(workItemName: string): Set<IWorkItem> {
     const returnSet = new Set();
     const myQuery = `/${workItemName}/`;
@@ -53,5 +54,5 @@ export class NeDBStore implements IWorkItemStore {
   }
 }
 
-const workItemStore = NeDBStore.GetDefault();
+const workItemStore = WorkitemStore.GetDefault();
 export { workItemStore };

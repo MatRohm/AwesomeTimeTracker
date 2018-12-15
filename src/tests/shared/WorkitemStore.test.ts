@@ -1,14 +1,14 @@
 import Nedb from 'nedb';
-import { NeDBStore } from '../../shared/Store';
+import { WorkitemStore } from '../../shared/WorkitemStore';
 import { WorkItem } from '../../shared/businessModell/WorkItem';
 
-let _nedbStore: NeDBStore;
+let _nedbStore: WorkitemStore;
 let _nodeExprDB: Nedb;
 
 describe('Integration test: GetWorkItemsByName', () => {
   beforeEach(() => {
     _nodeExprDB = new Nedb('./workItemDatabase.test.db');
-    _nedbStore = new NeDBStore(_nodeExprDB);
+    _nedbStore = new WorkitemStore(_nodeExprDB);
   });
 
   afterEach(() => {
@@ -29,7 +29,7 @@ describe('Integration test: GetWorkItemsByName', () => {
 describe('Integration test: SaveWorkItem', () => {
   beforeEach(() => {
     _nodeExprDB = new Nedb('./workItemDatabase.test.db');
-    _nedbStore = new NeDBStore(_nodeExprDB);
+    _nedbStore = new WorkitemStore(_nodeExprDB);
   });
 
   afterEach(() => {

@@ -1,4 +1,4 @@
-import { workItemStore } from '../../shared/Store';
+import { workItemStore } from '../../shared/WorkitemStore';
 import { IWorkItem } from '../../shared/businessModell/IWorkItem';
 
 export class CurrentWorkItemService {
