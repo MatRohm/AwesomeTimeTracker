@@ -1,10 +1,10 @@
-import { AutoCompleteTestsWrapper } from './AutocompleteteTestWrapper';
+import { AutoCompleteTestsHelper } from './AutocompleteteTestHelper';
 
 describe('Test if autocomplete renders correctly', () => {
-  let _autocomplete: AutoCompleteTestsWrapper;
+  let _autocomplete: AutoCompleteTestsHelper;
 
   beforeEach(() => {
-    _autocomplete = new AutoCompleteTestsWrapper();
+    _autocomplete = new AutoCompleteTestsHelper();
   });
 
   afterEach(() => {

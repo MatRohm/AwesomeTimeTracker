@@ -5,7 +5,7 @@ import { mount, ReactWrapper } from 'enzyme';
 import React from 'react';
 import Autocomplete from '../../../components/autocomplete/Autocomplete';
 
-export class AutoCompleteTestsWrapper {
+export class AutoCompleteTestsHelper {
   // tslint:disable-next-line:no-any
   private _autocomplete: ReactWrapper<any, Readonly<{}>, React.Component<{}, {}, any>>;
 
