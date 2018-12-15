@@ -31,12 +31,13 @@ module.exports = {
       diagostics: false,
     },
   },
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: [
     '**/*.{js,jsx,ts,tsx}',
     '!**/node_modules/**',
     '!**/vendor/**',
     '!**main.js',
+    '!**/tests/**',
   ],
   coverageDirectory: '_coverage',
 };
