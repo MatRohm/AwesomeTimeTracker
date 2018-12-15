@@ -35,8 +35,8 @@ describe('Test if autocomplete renders correctly', () => {
   }
 
   function assertEntryContainerDisplayProperty(value: string) {
-    // This is a workaround: the problem is when style is set over React Ref the value
-    // doesnt show up the enzyme react wrapper. Which is unfortunate but cant be changed at the moment
+    // This is a workaround: the problem is when style is set over React Ref the value of the style property itself
+    // doesnt gets added at the enzyme react wrapper. Which is unfortunate but cant be changed at the moment.
 
     const displayOfEntryContainer = _autocomplete.find(_entryContainerSelector).html();
     expect(displayOfEntryContainer).toContain('display: ' + value);
