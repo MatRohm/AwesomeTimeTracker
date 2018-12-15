@@ -1,8 +1,8 @@
 # Application specific
 _package/**
 _app/**
-*.db
-*.db~
+__coverage/**
+*.db*
 
 # User-specific stuff
 .idea/**/workspace.xml
