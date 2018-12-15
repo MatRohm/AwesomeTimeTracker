@@ -43,12 +43,16 @@ export class AutoCompleteTestsWrapper {
     return mock.object;
   }
 
-  public assertEntryContainerDisplayProperty(value: string): void {
+  public getDisplayStyleOfEntryContainer(): string {
     // This is a workaround: the problem is when style is set over React Ref the value of the style property itself
     // doesnt gets added at the enzyme react wrapper. Which is unfortunate but cant be changed at the moment.
 
     const displayOfEntryContainer = this._autocomplete.find(this._entryContainerSelector).html();
-    expect(displayOfEntryContainer).toContain('display: ' + value);
+    const regex = /(display:)\s*/;
+    const split = displayOfEntryContainer.split(regex);
+    const almostThere = split[split.length - 1];
+    const value = almostThere.substr(0, almostThere.indexOf(';'));
+    return value;
   }
 
   public enterTextIntoInput(value: string): void {

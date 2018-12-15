@@ -52,7 +52,8 @@ describe('Test if autocomplete renders correctly', () => {
 
   it('At the beginning entryContainer is not shown', () => {
     // Assert
-    _autocomplete.assertEntryContainerDisplayProperty('none');
+    const display = _autocomplete.getDisplayStyleOfEntryContainer();
+    expect(display).toBe('none');
   });
 
   it('When a text is entered but no entry is found no entryContainer is shown', () => {
@@ -60,7 +61,8 @@ describe('Test if autocomplete renders correctly', () => {
     _autocomplete.enterTextIntoInput('nonFound');
 
     // Assert
-    _autocomplete.assertEntryContainerDisplayProperty('none');
+    const display = _autocomplete.getDisplayStyleOfEntryContainer();
+    expect(display).toBe('none');
   });
 
   it('When a text is entered and an entry is found the entryContainer is shown', () => {
@@ -68,7 +70,8 @@ describe('Test if autocomplete renders correctly', () => {
     _autocomplete.enterTextIntoInput('test');
 
     // Assert
-    _autocomplete.assertEntryContainerDisplayProperty('block');
+    const display = _autocomplete.getDisplayStyleOfEntryContainer();
+    expect(display).toBe('block');
   });
 
   it('When an entry is selected the data-selected-id attribute is filled', () => {
