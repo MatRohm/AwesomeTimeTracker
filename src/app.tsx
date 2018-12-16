@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import './app.css';
-import CurrentWorkitem from './components/currentWorkItem/CurrentWorkItem';
+import CurrentWorkitem from './components/currentWorkItem/CurrentWorkitem';
 
 ReactDOM.render(
   <div className='root'>
