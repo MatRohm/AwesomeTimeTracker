@@ -1,27 +1,40 @@
-import { ArgumentNullError } from './ArgumentNullError';
-import { ArgumentNotAnObjectLiteralError } from './ArgumentNotAnObjectLiteralError';
+import { ArgumentError } from './ArgumentError';
 
 export class ArgumentUtility {
   /**
-   * Checks if the given argumentValue is defined (not null and not undefined) if not an error is thrown
+   * Checks if the given argumentValue is defined (not null and not undefined)
+   * if not an ArgumentError is thrown
    */
   // tslint:disable-next-line:no-any
   public static CheckDefined(argumentName: string, argumentValue: any): void {
     if (argumentValue == null || argumentValue === undefined) {
-      throw new ArgumentNullError(argumentName);
+      throw ArgumentError.getNotDefinedError(argumentName);
     }
   }
 
   /**
-   * Checks if the given argumentValue is defined (not null and not undefined) and if its an object literal
-   * if not an error is thrown
+   * Checks if the given argumentValue is defined (not null and not undefined) and it is an object literal
+   * if not an ArgumentError is thrown
    */
   // tslint:disable-next-line:no-any
   public static CheckDefinedAndIsObjectLiteral(argumentName: string, argumentValue: any): void {
     ArgumentUtility.CheckDefined(argumentName, argumentValue);
 
     if (!ArgumentUtility.isObjectLiteral(argumentValue)) {
-      throw new ArgumentNotAnObjectLiteralError(argumentName);
+      throw ArgumentError.getNotAnObjectLiteralError(argumentName);
+    }
+  }
+
+  /**
+   * Checks if the given argumentValue is defined (not null and not undefined) and it is a function
+   * if not an ArgumentError is thrown
+   */
+  // tslint:disable-next-line:no-any
+  public static CheckDefinedAndIsFunction(argumentName: string, argumentValue: any): void {
+    ArgumentUtility.CheckDefined(argumentName, argumentValue);
+
+    if (!(ArgumentUtility.isFunction(argumentValue))) {
+      throw ArgumentError.getNotAFunctionError(argumentName);
     }
   }
 
@@ -41,5 +54,10 @@ export class ArgumentUtility {
           return Object.getPrototypeOf(value) === _test;
         }))()
       );
+  }
+
+  // from https://stackoverflow.com/a/7356528
+  private static isFunction(value: any) {
+    return value && {}.toString.call(value) === '[object Function]';
   }
 }
