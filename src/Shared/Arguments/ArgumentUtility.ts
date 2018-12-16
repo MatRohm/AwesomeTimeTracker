@@ -17,7 +17,7 @@ export class ArgumentUtility {
    * if not an ArgumentError is thrown
    */
   // tslint:disable-next-line:no-any
-  public static CheckDefinedAndIsObjectLiteral(argumentName: string, argumentValue: any): void {
+  public static CheckDefinedAndObjectLiteral(argumentName: string, argumentValue: any): void {
     ArgumentUtility.CheckDefined(argumentName, argumentValue);
 
     if (!ArgumentUtility.isObjectLiteral(argumentValue)) {
@@ -30,7 +30,7 @@ export class ArgumentUtility {
    * if not an ArgumentError is thrown
    */
   // tslint:disable-next-line:no-any
-  public static CheckDefinedAndIsFunction(argumentName: string, argumentValue: any): void {
+  public static CheckDefinedAndFunction(argumentName: string, argumentValue: any): void {
     ArgumentUtility.CheckDefined(argumentName, argumentValue);
 
     if (!(ArgumentUtility.isFunction(argumentValue))) {
