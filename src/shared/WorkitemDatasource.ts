@@ -1,10 +1,10 @@
-import IAutocompleteDataSource from '../components/autocomplete/IAutocompleteDataSource';
+import IAutocompleteDatasource from '../components/autocomplete/IAutocompleteDataSource';
 import AutoCompleteEntry from '../components/autocomplete/AutoCompleteEntry';
 import { workItemStore } from './WorkitemStore';
 import { IWorkitemStore } from './IWorkitemStore';
 import { IWorkitem } from './businessModel/IWorkitem';
 
-export class WorkitemDataSource implements IAutocompleteDataSource {
+export class WorkitemDataSource implements IAutocompleteDatasource {
   private _store: IWorkitemStore;
 
   constructor(store?: IWorkitemStore) {
