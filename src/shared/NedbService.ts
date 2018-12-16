@@ -1,6 +1,5 @@
 import Nedb from 'nedb';
 import { ArgumentUtility } from './Arguments/ArgumentUtility';
-import { S_IFBLK } from 'constants';
 
 export class NedbService {
   public static getDefault(): NedbService {
