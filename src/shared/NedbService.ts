@@ -1,8 +1,9 @@
 import Nedb from 'nedb';
 import { ArgumentUtility } from './Arguments/ArgumentUtility';
+import { S_IFBLK } from 'constants';
 
 export class NedbService {
-  public static GetDefault(): NedbService {
+  public static getDefault(): NedbService {
     if (this.s_workItemInstance == null) {
       const workItemDatabase = new Nedb('./awesomeTimeTracker.db');
       workItemDatabase.loadDatabase();
@@ -23,24 +24,17 @@ export class NedbService {
     this._database.loadDatabase();
   }
 
-  public find(query: object,
-              onSucces: (documents: object[]) => void,
-              onError?: (errror: Error) => void): void {
+  public find(query: object): Promise<object[]> {
     ArgumentUtility.CheckDefinedAndObjectLiteral('query', query);
-    ArgumentUtility.CheckDefined('onSucces', onSucces);
 
-    const results = this._database.find(query);
-    results.limit(10);
-    results.exec((error, docs) => {
-      if (error) {
-        if (onError) {
-          onError(error);
+    return new Promise((resolve, reject) => {
+      this._database.find(query, (error: Error, docs: object[]) => {
+        if (error) {
+          reject(error);
         } else {
-          throw error;
+          resolve(docs);
         }
-      } else {
-        onSucces(docs);
-      }
+      });
     });
   }
 

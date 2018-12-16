@@ -1,4 +1,4 @@
-import { workItemStore } from '../../shared/WorkitemStore';
+import { WorkitemStore } from '../../shared/WorkitemStore';
 import { IWorkitem } from '../../shared/businessModel/IWorkitem';
 
 export class CurrentWorkitemService {
@@ -10,12 +10,15 @@ export class CurrentWorkitemService {
   }
   private static instance: CurrentWorkitemService;
 
+  private _store: WorkitemStore;
+
   private constructor() {
+    this._store = new WorkitemStore();
   }
 
   public GetWorkItems(name: string): Set<IWorkitem> {
     console.log('INPUT: ' + name);
-    const items = workItemStore.GetWorkItemsByName(name);
+    const items = this._store.GetWorkItemsByName(name);
     return null;
   }
 }

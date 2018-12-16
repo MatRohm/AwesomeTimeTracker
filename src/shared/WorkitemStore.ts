@@ -1,58 +1,59 @@
 // follow https://github.com/louischatriot/nedb for further information
-import Nedb from 'nedb';
 import { ArgumentUtility } from './Arguments/ArgumentUtility';
 import { IWorkitemStore } from './IWorkitemStore';
 import { IWorkitem } from './businessModel/IWorkitem';
+import { NedbService } from './NedbService';
 import { Workitem } from './businessModel/Workitem';
 
 export class WorkitemStore implements IWorkitemStore {
-  public static GetDefault(): IWorkitemStore {
-    if (this.s_workItemInstance == null) {
-      const workItemDatabase = new Nedb('./workItemDatabase.db');
-      this.s_workItemInstance = new WorkitemStore(workItemDatabase);
-    }
 
-    return this.s_workItemInstance;
+  public _databaseService: NedbService;
+
+  public constructor(service: NedbService) {
+    ArgumentUtility.CheckDefined('service', service);
+    this._databaseService = service;
   }
 
-  private static s_workItemInstance: IWorkitemStore;
+  public async GetWorkItemsByName(workItemName: string): Promise<IWorkitem[]> {
+    let workitems: IWorkitem[];
+    const query = this.GetWorkItemsByNameQuery(workItemName);
 
-  private _workItemDatabase: Nedb;
+    const promise = this._databaseService.find(query);
+    promise.then((docs) => { workitems = this.convertToWorkitems(docs); });
 
-  public constructor(nedb: Nedb) {
-    ArgumentUtility.CheckDefined('nedb', nedb);
-
-    this._workItemDatabase = nedb;
-    this._workItemDatabase.loadDatabase();
-  }
-
-  public GetWorkItemsByName(workItemName: string): Set<IWorkitem> {
-    const returnSet = new Set();
-    const myQuery = `/${workItemName}/`;
-    const results = this._workItemDatabase.find({ name: myQuery });
-    results.limit(10);
-    results.exec((err, docs) => {
-      docs.forEach((value, index) => {
-        const workItem = new Workitem();
-        workItem.name = (value as IWorkitem).name;
-        returnSet.add(workItem);
-      });
-    });
-
-    return returnSet;
+    await promise;
+    return workitems;
   }
 
   public SaveWorkItem(workItem: IWorkitem): void {
     ArgumentUtility.CheckDefined('workItem', workItem);
-    ArgumentUtility.CheckDefined('workItem.name', workItem.name);
+    ArgumentUtility.CheckHasContent('workItem.name', workItem.name);
 
     const documentToInsert = {
-      name: workItem.name,
+      worklog: {
+        name: workItem.name,
+      }
     };
+    this._databaseService.insert(documentToInsert);
+  }
 
-    this._workItemDatabase.insert(documentToInsert);
+  private convertToWorkitems(documents: any[]): IWorkitem[] {
+    const workitems = new Array<IWorkitem>();
+
+    documents.forEach((value, index) => {
+      const workitem = new Workitem();
+      workitem.name = value.worklog.name;
+      workitems.push(workitem);
+    });
+
+    return workitems;
+  }
+
+  private GetWorkItemsByNameQuery(workItemName: string): object {
+    // this is a regex which checks if the given value contains 'workItemName' case-insensitive
+    const containsNameRegex = new RegExp(`\\b(${workItemName})\\b`, 'gi');
+    console.log(containsNameRegex);
+    const query: object = { 'worklog.name': { $regex: containsNameRegex } };
+    return query;
   }
 }
-
-const workItemStore = WorkitemStore.GetDefault();
-export { workItemStore };
