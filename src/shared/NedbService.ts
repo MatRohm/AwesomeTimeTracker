@@ -5,8 +5,8 @@ export class NedbService {
   public static GetDefault(): NedbService {
     if (this.s_workItemInstance == null) {
       const workItemDatabase = new Nedb('./awesomeTimeTracker.db');
-      this.s_workItemInstance = new NedbService(workItemDatabase);
       workItemDatabase.loadDatabase();
+      this.s_workItemInstance = new NedbService(workItemDatabase);
     }
 
     return this.s_workItemInstance;
@@ -26,7 +26,7 @@ export class NedbService {
   public find(query: object,
               onSucces: (documents: object[]) => void,
               onError?: (errror: Error) => void): void {
-    ArgumentUtility.CheckDefinedAndIsObjectLiteral('query', query);
+    ArgumentUtility.CheckDefinedAndObjectLiteral('query', query);
     ArgumentUtility.CheckDefined('onSucces', onSucces);
 
     const results = this._database.find(query);
@@ -45,8 +45,7 @@ export class NedbService {
   }
 
   public insert(item: object): void {
-    ArgumentUtility.CheckDefinedAndIsObjectLiteral(item);
-
-    this._database.insert();
+    ArgumentUtility.CheckDefinedAndObjectLiteral('item', item);
+    this._database.insert(item);
   }
 }
