@@ -37,7 +37,7 @@ export class NedbService {
     });
   }
 
-  public insert(item: object): void {
+  public async insert(item: object): Promise<void> {
     ArgumentUtility.CheckDefinedAndObjectLiteral('item', item);
     this._database.insert(item);
   }
