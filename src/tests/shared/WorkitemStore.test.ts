@@ -1,6 +1,6 @@
 import Nedb from 'nedb';
 import { WorkitemStore } from '../../shared/WorkitemStore';
-import { WorkItem } from '../../shared/businessModell/WorkItem';
+import { Workitem } from '../../shared/businessModell/WorkItem';
 
 let _nedbStore: WorkitemStore;
 let _nodeExprDB: Nedb;
@@ -47,12 +47,12 @@ describe('Integration test: SaveWorkItem', () => {
   });
 
   it('When given a workitem with null name, throws excpetion', () => {
-    const workitem = new WorkItem();
+    const workitem = new Workitem();
     expect(() => _nedbStore.SaveWorkItem(workitem)).toThrowError();
   });
 
   it('When given a workitem stores it into database', () => {
-    const workitem = new WorkItem();
+    const workitem = new Workitem();
     const itemName = 'Testitem';
 
     workitem.name = itemName;

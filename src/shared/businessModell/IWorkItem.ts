@@ -1,7 +1,7 @@
-import { IWorkLog } from './IWorkLog';
+import { IWorklog } from './IWorkLog';
 
-export interface IWorkItem {
+export interface IWorkitem {
   name: string;
-  worklogs: Set<IWorkLog>;
+  worklogs: Set<IWorklog>;
   getWorkedTime(): string;
 }

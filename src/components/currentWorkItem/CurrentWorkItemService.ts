@@ -1,25 +1,25 @@
 import { workItemStore } from '../../shared/WorkitemStore';
-import { IWorkItem } from '../../shared/businessModell/IWorkItem';
+import { IWorkitem } from '../../shared/businessModell/IWorkItem';
 
-export class CurrentWorkItemService {
-  public static GetInstance(): CurrentWorkItemService {
+export class CurrentWorkitemService {
+  public static GetInstance(): CurrentWorkitemService {
     if (this.instance == null) {
-      this.instance = new CurrentWorkItemService();
+      this.instance = new CurrentWorkitemService();
     }
     return this.instance;
   }
-  private static instance: CurrentWorkItemService;
+  private static instance: CurrentWorkitemService;
 
   private constructor() {
   }
 
-  public GetWorkItems(name: string): Set<IWorkItem> {
+  public GetWorkItems(name: string): Set<IWorkitem> {
     console.log('INPUT: ' + name);
     const items = workItemStore.GetWorkItemsByName(name);
     return null;
   }
 }
 
-const serviceInstance = CurrentWorkItemService.GetInstance();
+const serviceInstance = CurrentWorkitemService.GetInstance();
 
 export { serviceInstance };

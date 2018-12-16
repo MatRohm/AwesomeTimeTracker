@@ -1,6 +1,6 @@
-import { IWorkItem } from './businessModell/IWorkItem';
+import { IWorkitem } from './businessModell/IWorkItem';
 
-export interface IWorkItemStore {
-  SaveWorkItem(workItem: IWorkItem): void;
-  GetWorkItemsByName(name: string): Set<IWorkItem>;
+export interface IWorkitemStore {
+  SaveWorkItem(workItem: IWorkitem): void;
+  GetWorkItemsByName(name: string): Set<IWorkitem>;
 }

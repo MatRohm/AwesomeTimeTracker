@@ -1,13 +1,13 @@
 import IAutocompleteDataSource from '../components/autocomplete/IAutocompleteDataSource';
 import AutoCompleteEntry from '../components/autocomplete/AutoCompleteEntry';
 import { workItemStore } from './WorkitemStore';
-import { IWorkItemStore } from './IWorkItemStore';
-import { IWorkItem } from './businessModell/IWorkItem';
+import { IWorkitemStore } from './IWorkitemStore';
+import { IWorkitem } from './businessModell/IWorkItem';
 
 export class WorkitemDataSource implements IAutocompleteDataSource {
-  private _store: IWorkItemStore;
+  private _store: IWorkitemStore;
 
-  constructor(store?: IWorkItemStore) {
+  constructor(store?: IWorkitemStore) {
     if (store) {
       this._store = store;
     } else {
@@ -27,7 +27,7 @@ export class WorkitemDataSource implements IAutocompleteDataSource {
     return autoCompleteEntries;
   }
 
-  public CreateEntry(store: IWorkItem): AutoCompleteEntry {
+  public CreateEntry(store: IWorkitem): AutoCompleteEntry {
     const entry = new AutoCompleteEntry(store.name, store.name);
     return entry;
   }

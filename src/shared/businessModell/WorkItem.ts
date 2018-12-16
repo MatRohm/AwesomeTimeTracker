@@ -1,8 +1,8 @@
-import { IWorkLog } from './IWorkLog';
-import { IWorkItem } from './IWorkItem';
+import { IWorklog } from './IWorkLog';
+import { IWorkItem as IWorkitem } from './IWorkItem';
 
-export class WorkItem implements IWorkItem {
-  public worklogs: Set<IWorkLog>;
+export class Workitem implements IWorkitem {
+  public worklogs: Set<IWorklog>;
   private _name: string;
 
   public get name(): string {

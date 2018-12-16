@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import './app.css';
-import CurrentWorkItem from './components/currentWorkItem/CurrentWorkItem';
+import CurrentWorkitem from './components/currentWorkItem/CurrentWorkItem';
 
 ReactDOM.render(
   <div className='root'>
@@ -11,7 +11,7 @@ ReactDOM.render(
       Left pane
         </div>
     <main className='mainContent'>
-      <CurrentWorkItem></CurrentWorkItem>
+      <CurrentWorkitem></CurrentWorkitem>
     </main>
     <footer className='footer'>FOOTER!</footer>
   </div>,

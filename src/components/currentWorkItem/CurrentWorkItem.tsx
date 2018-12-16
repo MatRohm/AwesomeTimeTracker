@@ -3,7 +3,7 @@ import Autocomplete from '../autocomplete/Autocomplete';
 import { Shoes } from './Shoes';
 import IAutocompleteDataSource from '../autocomplete/IAutocompleteDataSource';
 
-export default class CurrentWorkItem extends React.Component {
+export default class CurrentWorkitem extends React.Component {
 
   public render() {
 
