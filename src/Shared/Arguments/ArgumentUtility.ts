@@ -38,6 +38,31 @@ export class ArgumentUtility {
     }
   }
 
+  /**
+   * Checks if the given argumentValue is defined (not null and not undefined) and the string is not empty or all whitespace
+   * if not an ArgumentError is thrown
+   */
+  public static CheckHasContent(argumentName: string, argumentValue: string) {
+    ArgumentUtility.CheckDefined(argumentName, argumentValue);
+
+    const checkValue = argumentValue.trim();
+    if (checkValue === '') {
+      throw ArgumentError.getNoContentError(argumentName);
+    }
+  }
+
+  /**
+   * Checks if the given argumentValue is defined (not null and not undefined) and has elements (length > 0)
+   * if not an ArgumentError is thrown
+   */
+  public static CheckHasElements(argumentName: string, argumentValue: []) {
+    ArgumentUtility.CheckDefined(argumentName, argumentValue);
+
+    if (argumentValue.length < 1) {
+      throw ArgumentError.getNoElementsError(argumentName);
+    }
+  }
+
   // tslint:disable-next-line:no-any
   // from: https://stackoverflow.com/a/1482209
   private static isObjectLiteral(value: any) {
