@@ -63,8 +63,8 @@ export class ArgumentUtility {
     }
   }
 
-  // tslint:disable-next-line:no-any
   // from: https://stackoverflow.com/a/1482209
+  // tslint:disable-next-line:no-any
   private static isObjectLiteral(value: any) {
     let _test = value;
     return typeof value !== 'object' || value === null ?
@@ -82,6 +82,7 @@ export class ArgumentUtility {
   }
 
   // from https://stackoverflow.com/a/7356528
+  // tslint:disable-next-line:no-any
   private static isFunction(value: any) {
     return value && {}.toString.call(value) === '[object Function]';
   }
