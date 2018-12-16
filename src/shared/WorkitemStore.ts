@@ -2,8 +2,8 @@
 import Nedb from 'nedb';
 import { ArgumentUtility } from './Arguments/ArgumentUtility';
 import { IWorkitemStore } from './IWorkitemStore';
-import { IWorkitem } from './businessModell/IWorkItem';
-import { Workitem } from './businessModell/WorkItem';
+import { IWorkitem } from './businessModel/IWorkitem';
+import { Workitem } from './businessModel/Workitem';
 
 export class WorkitemStore implements IWorkitemStore {
   public static GetDefault(): IWorkitemStore {

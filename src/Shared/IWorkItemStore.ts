@@ -1,4 +1,4 @@
-import { IWorkitem } from './businessModell/IWorkItem';
+import { IWorkitem } from './businessModel/IWorkitem';
 
 export interface IWorkitemStore {
   SaveWorkItem(workItem: IWorkitem): void;

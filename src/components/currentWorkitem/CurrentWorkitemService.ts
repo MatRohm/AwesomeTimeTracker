@@ -1,5 +1,5 @@
 import { workItemStore } from '../../shared/WorkitemStore';
-import { IWorkitem } from '../../shared/businessModell/IWorkItem';
+import { IWorkitem } from '../../shared/businessModel/IWorkitem';
 
 export class CurrentWorkitemService {
   public static GetInstance(): CurrentWorkitemService {

@@ -1,5 +1,5 @@
 import { IWorklog } from './IWorkLog';
-import { IWorkItem as IWorkitem } from './IWorkItem';
+import { IWorkitem as IWorkitem } from './IWorkitem';
 
 export class Workitem implements IWorkitem {
   public worklogs: Set<IWorklog>;

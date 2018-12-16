@@ -2,7 +2,7 @@ import IAutocompleteDataSource from '../components/autocomplete/IAutocompleteDat
 import AutoCompleteEntry from '../components/autocomplete/AutoCompleteEntry';
 import { workItemStore } from './WorkitemStore';
 import { IWorkitemStore } from './IWorkitemStore';
-import { IWorkitem } from './businessModell/IWorkItem';
+import { IWorkitem } from './businessModel/IWorkitem';
 
 export class WorkitemDataSource implements IAutocompleteDataSource {
   private _store: IWorkitemStore;
