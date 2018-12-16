@@ -1,18 +1,15 @@
-import IAutocompleteDatasource from '../components/autocomplete/IAutocompleteDataSource';
 import AutoCompleteEntry from '../components/autocomplete/AutoCompleteEntry';
-import { workItemStore } from './WorkitemStore';
-import { IWorkitemStore } from './IWorkitemStore';
+import IAutocompleteDatasource from '../components/autocomplete/IAutocompleteDataSource';
+import { ArgumentUtility } from './Arguments/ArgumentUtility';
 import { IWorkitem } from './businessModel/IWorkitem';
+import { IWorkitemStore } from './IWorkitemStore';
 
 export class WorkitemDataSource implements IAutocompleteDatasource {
   private _store: IWorkitemStore;
 
-  constructor(store?: IWorkitemStore) {
-    if (store) {
-      this._store = store;
-    } else {
-      this._store = workItemStore;
-    }
+  constructor(store: IWorkitemStore) {
+    ArgumentUtility.CheckDefined('store', store);
+    this._store = store;
   }
 
   public GetEntries(filter: string): AutoCompleteEntry[] {
