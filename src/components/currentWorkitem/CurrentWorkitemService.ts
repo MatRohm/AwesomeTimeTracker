@@ -1,5 +1,6 @@
 import { WorkitemStore } from '../../shared/WorkitemStore';
 import { IWorkitem } from '../../shared/businessModel/IWorkitem';
+import { NedbService } from '../../shared/NedbService';
 
 export class CurrentWorkitemService {
   public static GetInstance(): CurrentWorkitemService {
@@ -13,7 +14,8 @@ export class CurrentWorkitemService {
   private _store: WorkitemStore;
 
   private constructor() {
-    this._store = new WorkitemStore();
+    const service = NedbService.getDefault();
+    this._store = new WorkitemStore(service);
   }
 
   public GetWorkItems(name: string): Set<IWorkitem> {

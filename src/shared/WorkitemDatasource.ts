@@ -8,18 +8,20 @@ export class WorkitemDataSource implements IAutocompleteDatasource {
   private _store: IWorkitemStore;
 
   constructor(store: IWorkitemStore) {
-    ArgumentUtility.CheckDefined('store', store);
+    ArgumentUtility.checkDefined('store', store);
     this._store = store;
   }
 
-  public GetEntries(filter: string): AutoCompleteEntry[] {
+  public getEntries(filter: string): AutoCompleteEntry[] {
     const workitems = this._store.GetWorkItemsByName(filter);
 
     const autoCompleteEntries = new Array<AutoCompleteEntry>();
-    workitems.forEach(o => {
+    workitems.then(o => o.forEach(o => {
       const entry = this.CreateEntry(o);
       autoCompleteEntries.push(entry);
-    });
+    }));
+
+    // await workitems;
 
     return autoCompleteEntries;
   }
