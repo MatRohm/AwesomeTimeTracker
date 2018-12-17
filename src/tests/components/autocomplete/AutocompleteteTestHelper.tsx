@@ -29,14 +29,14 @@ export class AutoCompleteTestsHelper {
   public createDataSourceMock(): IAutocompleteDataSource {
     const mock = TypeMoq.Mock.ofType<IAutocompleteDataSource>();
 
-    mock.setup(o => o.GetEntries('test')).returns(() => {
+    mock.setup(o => o.getEntries('test')).returns(() => {
       return [
         new AutoCompleteEntry('1', 'test'),
         new AutoCompleteEntry('2', 'second test')
       ];
     });
 
-    mock.setup(o => o.GetEntries('t')).returns(() => {
+    mock.setup(o => o.getEntries('t')).returns(() => {
       return [new AutoCompleteEntry('1', 'test')];
     });
 

@@ -1,5 +1,5 @@
 import AutoCompleteEntry from './AutoCompleteEntry';
 
 export default interface IAutocompleteDatasource {
-  GetEntries(filter: string): AutoCompleteEntry[];
+  getEntries(filter: string): AutoCompleteEntry[];
 }

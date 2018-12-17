@@ -9,6 +9,6 @@ export class AutocompleteService {
   }
 
   public searchEntries(filterText: string): AutoCompleteEntry[] {
-    return this._dataSource.GetEntries(filterText);
+    return this._dataSource.getEntries(filterText);
   }
 }
