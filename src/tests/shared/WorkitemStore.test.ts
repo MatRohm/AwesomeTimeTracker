@@ -24,9 +24,9 @@ describe('Integration tests for WorkitemStore', () => {
     const item = new Workitem();
     item.name = 'Sample test';
 
-    expect(() => _workItemStore.SaveWorkItem(item)).not.toThrowError();
+    expect(() => _workItemStore.saveWorkItem(item)).not.toThrowError();
 
-    const loadedWorkItems = await _workItemStore.GetWorkItemsByName(item.name);
+    const loadedWorkItems = await _workItemStore.getWorkItemsByName(item.name);
     expect(loadedWorkItems).toHaveLength(1);
     expect(loadedWorkItems[0].name).toBe(item.name);
   });

@@ -17,7 +17,7 @@ export class ArgumentUtility {
    * if not an ArgumentError is thrown
    */
   // tslint:disable-next-line:no-any
-  public static CheckDefinedAndObjectLiteral(argumentName: string, argumentValue: any): void {
+  public static checkDefinedAndObjectLiteral(argumentName: string, argumentValue: any): void {
     ArgumentUtility.checkDefined(argumentName, argumentValue);
 
     if (!ArgumentUtility.isObjectLiteral(argumentValue)) {

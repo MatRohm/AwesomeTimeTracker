@@ -14,7 +14,7 @@ export class WorkitemStore implements IWorkitemStore {
     this._databaseService = service;
   }
 
-  public async GetWorkItemsByName(workItemName: string): Promise<IWorkitem[]> {
+  public async getWorkItemsByName(workItemName: string): Promise<IWorkitem[]> {
     let workitems: IWorkitem[];
     const query = this.GetWorkItemsByNameQuery(workItemName);
 
@@ -25,7 +25,7 @@ export class WorkitemStore implements IWorkitemStore {
     return workitems;
   }
 
-  public SaveWorkItem(workItem: IWorkitem): void {
+  public saveWorkItem(workItem: IWorkitem): void {
     ArgumentUtility.checkDefined('workItem', workItem);
     ArgumentUtility.checkHasContent('workItem.name', workItem.name);
 

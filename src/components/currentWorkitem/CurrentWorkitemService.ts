@@ -3,7 +3,7 @@ import { IWorkitem } from '../../shared/businessModel/IWorkitem';
 import { NedbService } from '../../shared/NedbService';
 
 export class CurrentWorkitemService {
-  public static GetInstance(): CurrentWorkitemService {
+  public static getInstance(): CurrentWorkitemService {
     if (this.instance == null) {
       this.instance = new CurrentWorkitemService();
     }
@@ -18,13 +18,13 @@ export class CurrentWorkitemService {
     this._store = new WorkitemStore(service);
   }
 
-  public GetWorkItems(name: string): Set<IWorkitem> {
+  public getWorkItems(name: string): Set<IWorkitem> {
     console.log('INPUT: ' + name);
-    const items = this._store.GetWorkItemsByName(name);
+    const items = this._store.getWorkItemsByName(name);
     return null;
   }
 }
 
-const serviceInstance = CurrentWorkitemService.GetInstance();
+const serviceInstance = CurrentWorkitemService.getInstance();
 
 export { serviceInstance };

@@ -24,7 +24,7 @@ export class NedbService {
   }
 
   public find(query: object): Promise<object[]> {
-    ArgumentUtility.c + heckDefinedAndObjectLiteral('query', query);
+    ArgumentUtility.checkDefinedAndObjectLiteral('query', query);
 
     return new Promise((resolve, reject) => {
       this._database.find(query, (error: Error, docs: object[]) => {
@@ -38,7 +38,7 @@ export class NedbService {
   }
 
   public async insert(item: object): Promise<void> {
-    ArgumentUtility.c + heckDefinedAndObjectLiteral('item', item);
+    ArgumentUtility.checkDefinedAndObjectLiteral('item', item);
     this._database.insert(item);
   }
 }

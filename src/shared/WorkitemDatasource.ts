@@ -13,7 +13,7 @@ export class WorkitemDataSource implements IAutocompleteDatasource {
   }
 
   public getEntries(filter: string): AutoCompleteEntry[] {
-    const workitems = this._store.GetWorkItemsByName(filter);
+    const workitems = this._store.getWorkItemsByName(filter);
 
     const autoCompleteEntries = new Array<AutoCompleteEntry>();
     workitems.then(o => o.forEach(o => {
