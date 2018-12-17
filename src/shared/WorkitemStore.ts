@@ -52,7 +52,6 @@ export class WorkitemStore implements IWorkitemStore {
   private GetWorkItemsByNameQuery(workItemName: string): object {
     // this is a regex which checks if the given value contains 'workItemName' case-insensitive
     const containsNameRegex = new RegExp(`\\b(${workItemName})\\b`, 'gi');
-    console.log(containsNameRegex);
     const query: object = { 'worklog.name': { $regex: containsNameRegex } };
     return query;
   }
