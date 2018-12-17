@@ -10,7 +10,7 @@ export class WorkitemStore implements IWorkitemStore {
   public _databaseService: NedbService;
 
   public constructor(service: NedbService) {
-    ArgumentUtility.CheckDefined('service', service);
+    ArgumentUtility.checkDefined('service', service);
     this._databaseService = service;
   }
 
@@ -26,8 +26,8 @@ export class WorkitemStore implements IWorkitemStore {
   }
 
   public SaveWorkItem(workItem: IWorkitem): void {
-    ArgumentUtility.CheckDefined('workItem', workItem);
-    ArgumentUtility.CheckHasContent('workItem.name', workItem.name);
+    ArgumentUtility.checkDefined('workItem', workItem);
+    ArgumentUtility.checkHasContent('workItem.name', workItem.name);
 
     const documentToInsert = {
       worklog: {

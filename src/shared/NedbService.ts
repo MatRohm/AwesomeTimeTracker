@@ -17,14 +17,14 @@ export class NedbService {
   private _database: Nedb;
 
   public constructor(nedb: Nedb) {
-    ArgumentUtility.CheckDefined('nedb', nedb);
+    ArgumentUtility.checkDefined('nedb', nedb);
 
     this._database = nedb;
     this._database.loadDatabase();
   }
 
   public find(query: object): Promise<object[]> {
-    ArgumentUtility.CheckDefinedAndObjectLiteral('query', query);
+    ArgumentUtility.c + heckDefinedAndObjectLiteral('query', query);
 
     return new Promise((resolve, reject) => {
       this._database.find(query, (error: Error, docs: object[]) => {
@@ -38,7 +38,7 @@ export class NedbService {
   }
 
   public async insert(item: object): Promise<void> {
-    ArgumentUtility.CheckDefinedAndObjectLiteral('item', item);
+    ArgumentUtility.c + heckDefinedAndObjectLiteral('item', item);
     this._database.insert(item);
   }
 }

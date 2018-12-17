@@ -6,7 +6,7 @@ export class ArgumentUtility {
    * if not an ArgumentError is thrown
    */
   // tslint:disable-next-line:no-any
-  public static CheckDefined(argumentName: string, argumentValue: any): void {
+  public static checkDefined(argumentName: string, argumentValue: any): void {
     if (argumentValue == null || argumentValue === undefined) {
       throw ArgumentError.getNotDefinedError(argumentName);
     }
@@ -18,7 +18,7 @@ export class ArgumentUtility {
    */
   // tslint:disable-next-line:no-any
   public static CheckDefinedAndObjectLiteral(argumentName: string, argumentValue: any): void {
-    ArgumentUtility.CheckDefined(argumentName, argumentValue);
+    ArgumentUtility.checkDefined(argumentName, argumentValue);
 
     if (!ArgumentUtility.isObjectLiteral(argumentValue)) {
       throw ArgumentError.getNotAnObjectLiteralError(argumentName);
@@ -30,8 +30,8 @@ export class ArgumentUtility {
    * if not an ArgumentError is thrown
    */
   // tslint:disable-next-line:no-any
-  public static CheckDefinedAndFunction(argumentName: string, argumentValue: any): void {
-    ArgumentUtility.CheckDefined(argumentName, argumentValue);
+  public static checkDefinedAndFunction(argumentName: string, argumentValue: any): void {
+    ArgumentUtility.checkDefined(argumentName, argumentValue);
 
     if (!(ArgumentUtility.isFunction(argumentValue))) {
       throw ArgumentError.getNotAFunctionError(argumentName);
@@ -42,8 +42,8 @@ export class ArgumentUtility {
    * Checks if the given argumentValue is defined (not null and not undefined) and the string is not empty or all whitespace
    * if not an ArgumentError is thrown
    */
-  public static CheckHasContent(argumentName: string, argumentValue: string) {
-    ArgumentUtility.CheckDefined(argumentName, argumentValue);
+  public static checkHasContent(argumentName: string, argumentValue: string) {
+    ArgumentUtility.checkDefined(argumentName, argumentValue);
 
     const checkValue = argumentValue.trim();
     if (checkValue === '') {
@@ -55,8 +55,8 @@ export class ArgumentUtility {
    * Checks if the given argumentValue is defined (not null and not undefined) and has elements (length > 0)
    * if not an ArgumentError is thrown
    */
-  public static CheckHasElements(argumentName: string, argumentValue: []) {
-    ArgumentUtility.CheckDefined(argumentName, argumentValue);
+  public static checkHasElements(argumentName: string, argumentValue: []) {
+    ArgumentUtility.checkDefined(argumentName, argumentValue);
 
     if (argumentValue.length < 1) {
       throw ArgumentError.getNoElementsError(argumentName);
