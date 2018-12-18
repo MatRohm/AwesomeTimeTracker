@@ -71,10 +71,8 @@ export class ArgumentUtility {
       false :
       (
         ((() => {
-          while (!false) {
-            if (Object.getPrototypeOf(_test = Object.getPrototypeOf(_test)) === null) {
-              break;
-            }
+          while (Object.getPrototypeOf(_test) !== null) {
+            _test = Object.getPrototypeOf(_test);
           }
           return Object.getPrototypeOf(value) === _test;
         }))()
