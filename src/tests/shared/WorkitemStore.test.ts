@@ -21,8 +21,7 @@ describe('Integration tests for WorkitemStore', () => {
   });
 
   it('test save and find', async () => {
-    const item = new Workitem();
-    item.name = 'Sample test';
+    const item = new Workitem('Sample test');
 
     expect(() => _workItemStore.saveWorkItem(item)).not.toThrowError();
 

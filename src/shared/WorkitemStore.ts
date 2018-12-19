@@ -41,8 +41,7 @@ export class WorkitemStore implements IWorkitemStore {
     const workitems = new Array<IWorkitem>();
 
     documents.forEach((value, index) => {
-      const workitem = new Workitem();
-      workitem.name = value.worklog.name;
+      const workitem = new Workitem(value.worklog.name);
       workitems.push(workitem);
     });
 
