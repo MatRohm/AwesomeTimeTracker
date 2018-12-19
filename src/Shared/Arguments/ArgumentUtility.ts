@@ -55,7 +55,7 @@ export class ArgumentUtility {
    * Checks if the given argumentValue is defined (not null and not undefined) and has elements (length > 0)
    * if not an ArgumentError is thrown
    */
-  public static checkHasElements(argumentName: string, argumentValue: []) {
+  public static checkHasElements(argumentName: string, argumentValue: any[]) {
     ArgumentUtility.checkDefined(argumentName, argumentValue);
 
     if (argumentValue.length < 1) {
