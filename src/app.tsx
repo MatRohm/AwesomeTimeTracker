@@ -1,19 +1,22 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-
 import './app.css';
 import CurrentWorkitem from './components/currentWorkItem/CurrentWorkitem';
+import ReactDOM from 'react-dom';
 
-ReactDOM.render(
-  <div className='root'>
-    <header className='header'>header!</header>
-    <div className='menu'>
-      Left pane
+export class App extends React.Component<{}> {
+  public render() {
+    return <div className='root' >
+      <header className='header'>header!</header>
+      <div className='menu'>
+        Left pane
         </div>
-    <main className='mainContent'>
-      <CurrentWorkitem></CurrentWorkitem>
-    </main>
-    <footer className='footer'>FOOTER!</footer>
-  </div>,
-  document.getElementById('root'),
-);
+      <main className='mainContent'>
+        <CurrentWorkitem></CurrentWorkitem>
+      </main>
+      <footer className='footer'>FOOTER!</footer>;
+    </div >;
+  }
+}
+
+const containerDiv = document.getElementById('root');
+ReactDOM.render(<App />, containerDiv || document.createElement('DIV'));
