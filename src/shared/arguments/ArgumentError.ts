@@ -23,4 +23,3 @@ export class ArgumentError extends Error {
     super(errormessage);
   }
 }
-
