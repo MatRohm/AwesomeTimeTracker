@@ -1,7 +1,7 @@
 # Application specific
-_package/**
-_app/**
-_coverage/**
+_package/
+_app/
+_coverage/
 *.db*
 
 # User-specific stuff
