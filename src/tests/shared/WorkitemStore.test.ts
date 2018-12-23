@@ -1,7 +1,7 @@
 import Nedb from 'nedb';
-import { WorkitemStore } from '../../shared/WorkitemStore';
-import { Workitem } from '../../shared/businessModel/Workitem';
-import { NedbService } from '../../shared/NedbService';
+import { WorkitemStore } from '../../core/WorkitemStore';
+import { Workitem } from '../../core/businessModel/Workitem';
+import { NedbService } from '../../core/NedbService';
 
 let _workItemStore: WorkitemStore;
 let _nodeExprDB: Nedb;

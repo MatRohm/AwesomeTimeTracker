@@ -1,6 +1,6 @@
-import { WorkitemStore } from '../../shared/WorkitemStore';
-import { IWorkitem } from '../../shared/businessModel/IWorkitem';
-import { NedbService } from '../../shared/NedbService';
+import { WorkitemStore } from '../../core/WorkitemStore';
+import { IWorkitem } from '../../core/businessModel/IWorkitem';
+import { NedbService } from '../../core/NedbService';
 
 export class CurrentWorkitemService {
   public static getInstance(): CurrentWorkitemService {

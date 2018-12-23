@@ -1,6 +1,6 @@
-import { NedbService } from '../shared/NedbService';
+import { NedbService } from '../core/NedbService';
 import { NedbServiceTestHelper } from './NedbServiceTestHelper';
-import { ArgumentError } from '../shared/Arguments/ArgumentError';
+import { ArgumentError } from '../core/Arguments/ArgumentError';
 
 describe('Checks wether NedbService.find() works correctly', () => {
   let db: NedbService;

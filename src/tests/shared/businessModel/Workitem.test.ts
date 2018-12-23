@@ -1,5 +1,5 @@
-import { Workitem } from '../../../shared/businessModel/Workitem';
-import { IWorklog } from '../../../shared/businessModel/IWorkLog';
+import { Workitem } from '../../../core/businessModel/Workitem';
+import { IWorklog } from '../../../core/businessModel/IWorkLog';
 import * as TypeMoq from 'typemoq';
 
 describe('Checks whether Workitem works correctly', () => {

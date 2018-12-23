@@ -3,7 +3,7 @@ import IAutocompleteDataSource from './IAutocompleteDataSource';
 import { AutocompleteService } from './AutocompleteService';
 import AutoCompleteEntry from './AutoCompleteEntry';
 import './Autocomplete.css';
-import { ArgumentUtility } from '../../shared/Arguments/ArgumentUtility';
+import { ArgumentUtility } from '../../core/Arguments/ArgumentUtility';
 
 export default class Autocomplete extends React.Component<{ dataSource: IAutocompleteDataSource }, { inputValue: { text: string, id: string }, entries: AutoCompleteEntry[] }> {
   public _inputText: React.RefObject<HTMLInputElement>;

@@ -1,5 +1,5 @@
 import Nedb from 'nedb';
-import { NedbService } from '../shared/NedbService';
+import { NedbService } from '../core/NedbService';
 
 export class NedbServiceTestHelper {
   public static getTestInstance(): NedbService {

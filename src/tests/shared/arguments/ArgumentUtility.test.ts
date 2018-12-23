@@ -1,4 +1,4 @@
-import { ArgumentUtility } from '../../../shared/Arguments/ArgumentUtility';
+import { ArgumentUtility } from '../../../core/Arguments/ArgumentUtility';
 
 describe('Test whether ArgumentUtility.checkDefined() works correctly', () => {
 
