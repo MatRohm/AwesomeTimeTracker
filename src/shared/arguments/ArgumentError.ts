@@ -19,6 +19,10 @@ export class ArgumentError extends Error {
     return new ArgumentError(`The given array argument '${argumentName}' does not have an element`);
   }
 
+  public static getObjectHasNoProperties(argumentName: string): ArgumentError {
+    return new ArgumentError(`The given object argument '${argumentName}' does not have any properties`);
+  }
+
   private constructor(errormessage: string) {
     super(errormessage);
   }

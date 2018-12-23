@@ -26,6 +26,19 @@ export class ArgumentUtility {
   }
 
   /**
+   * Checks if the given argumentValue is defined (not null and not undefined) and it is an object literal.
+   * It also checks wether the object has at least one property
+   * if not an ArgumentError is thrown
+   */
+  public static checkObjectHasContent(argumentName: string, argumentValue: object): void {
+    ArgumentUtility.checkDefinedAndObjectLiteral(argumentName, argumentValue);
+
+    if (this.isEmptyObject(argumentValue)) {
+      throw ArgumentError.getObjectHasNoProperties(argumentName);
+    }
+  }
+
+  /**
    * Checks if the given argumentValue is defined (not null and not undefined) and it is a function
    * if not an ArgumentError is thrown
    */
@@ -83,5 +96,10 @@ export class ArgumentUtility {
   // tslint:disable-next-line:no-any
   private static isFunction(value: any) {
     return value && {}.toString.call(value) === '[object Function]';
+  }
+
+  // from: https://stackoverflow.com/a/2673229
+  private static isEmptyObject(obj: object): boolean {
+    return Object.getOwnPropertyNames(obj).length === 0;
   }
 }

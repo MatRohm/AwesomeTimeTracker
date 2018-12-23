@@ -113,3 +113,40 @@ describe('Tests whether ArgumentUtility.checkHasElements() works correctly', () 
     expect(() => ArgumentUtility.checkHasElements('value', value)).not.toThrow();
   });
 });
+
+describe('Checks wether if ArgumentUtility.checkObjectHasContent works correctly', () => {
+  it('When given null it throws an error', () => {
+    expect(() => ArgumentUtility.checkObjectHasContent('value', null)).toThrow();
+  });
+
+  it('When given undefined it throws an error', () => {
+    expect(() => ArgumentUtility.checkObjectHasContent('value', undefined)).toThrow();
+  });
+
+  it('When given an empty object itt throws an error', () => {
+    expect(() => ArgumentUtility.checkObjectHasContent('value', {})).toThrow();
+  });
+
+  it('When given an object with values (object literal) it does not throw an error', () => {
+    const value = { sample: 'sample' };
+    expect(() => ArgumentUtility.checkObjectHasContent('value', value)).not.toThrow();
+  });
+
+  it('When given an object with values (object constructor) it does not throw an error', () => {
+    // tslint:disable-next-line:no-any
+    const value: any = new Object();
+    value.sample = 'sample';
+    expect(() => ArgumentUtility.checkObjectHasContent('value', value)).not.toThrow();
+  });
+
+  it('When given an object with values (class constructor) it throws an error', () => {
+    // tslint:disable-next-line:max-classes-per-file
+    const sampleClass = class Sample { public field: number; };
+
+    // tslint:disable-next-line:no-any
+    const value: any = new sampleClass();
+    value.field = 10;
+
+    expect(() => ArgumentUtility.checkObjectHasContent('value', value)).toThrow();
+  });
+});
