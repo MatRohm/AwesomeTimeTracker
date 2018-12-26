@@ -23,10 +23,9 @@ export class NedbService {
     this._database.loadDatabase();
   }
 
-  public async find(query: object): Promise<any[]> {
-    ArgumentUtility.checkDefinedAndObjectLiteral('query', query);
-
+  public find(query: object): Promise<any[]> {
     return new Promise((resolve, reject) => {
+      ArgumentUtility.checkDefinedAndObjectLiteral('query', query);
       this._database.find(query, (error: Error, docs: object[]) => {
         if (error) {
           reject(error);

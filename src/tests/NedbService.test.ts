@@ -5,11 +5,11 @@ import { ArgumentError } from '../core/Arguments/ArgumentError';
 describe('Checks wether NedbService.find() works correctly', () => {
   let db: NedbService;
 
-  beforeAll(() => {
+  beforeEach(() => {
     db = NedbServiceTestHelper.getTestInstance();
   });
 
-  afterAll(() => {
+  afterEach(() => {
     NedbServiceTestHelper.clearDatabase();
   });
 
@@ -23,44 +23,65 @@ describe('Checks wether NedbService.find() works correctly', () => {
 
   it('When find() called with an empty object, it returns an empty array', async () => {
     const obj = {};
-    const result = await db.find(obj);
-    expect(result).toHaveLength(0);
+    const result = db.find(obj);
+    expect(result).resolves.toHaveLength(0);
+  });
+
+  it('When find() is called with an erronous query, the promise is rejected', async () => {
+    const obj = { $a: '$a' }; // "$" at the beginning is not allowed in Nedb
+    const result = db.find(obj);
+    expect(db.find(null)).rejects.toHaveBeenCalled();
   });
 });
 
 describe('Checks wether NedbService.insert() works correctly', () => {
   let db: NedbService;
 
-  beforeAll(() => {
+  beforeEach(() => {
     db = NedbServiceTestHelper.getTestInstance();
   });
 
-  afterAll(() => {
+  afterEach(() => {
     NedbServiceTestHelper.clearDatabase();
   });
 
   it('When insert() is called with null, it throws an error', async () => {
-    expect(db.insert(null)).rejects.toEqual(ArgumentError.getNotDefinedError('itemToInsert'));
+    await expect(db.insert(null)).rejects.toEqual(ArgumentError.getNotDefinedError('itemToInsert'));
   });
 
   it('When insert() is called with undefined, it throws an error', async () => {
-    expect(db.insert(undefined)).rejects.toEqual(ArgumentError.getNotDefinedError('itemToInsert'));
+    await expect(db.insert(undefined)).rejects.toEqual(ArgumentError.getNotDefinedError('itemToInsert'));
   });
 
   it('When insert() is called with empty object, it throws an error', async () => {
-    expect(db.insert({})).rejects.toEqual(ArgumentError.getObjectHasNoProperties('itemToInsert'));
+    await expect(db.insert({})).rejects.toEqual(ArgumentError.getObjectHasNoProperties('itemToInsert'));
   });
 
   it('When insert() is called with an object which has properties it insert it into database', async () => {
     // Arrange
-    const sample = { sample: 'value' };
+    const sampleObject = { sampleValue: 'value' };
 
     // Act
-    await db.insert(sample);
+    await db.insert(sampleObject);
 
     // Assert
-    const actual = await db.find(sample);
-    actual.forEach(o => delete o._id);
-    expect(actual).toEqual(new Array<object>(sample));
+    const promise = db.find(sampleObject);
+    expect(promise).resolves.toBe((actual: Array<{ sampleValue: any, _id: string; }>) => {
+      expect(actual).toHaveLength(1);
+      actual.forEach(o => delete o._id);
+      expect(actual[0].sampleValue).toEqual(sampleObject.sampleValue);
+    });
+  });
+});
+
+describe('Checks if NedbService.getDefault() works correctly', () => {
+  it('Whenn getDefault() is called it does not throw an exception', () => {
+    expect(() => NedbService.getDefault()).not.toThrow();
+  });
+
+  it('When getDefault() is called twice it returns the same instance', () => {
+    const firstInstance = NedbService.getDefault();
+    const secondInstance = NedbService.getDefault();
+    expect(firstInstance).toEqual(secondInstance);
   });
 });
