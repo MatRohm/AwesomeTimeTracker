@@ -3,16 +3,6 @@
   position: relative;
 }
 
-.autocompleteEntry {
-  list-style-type: none;
-  background-color: white;
-  padding: 2px;
-}
-
-.autocompleteEntry:hover, .autocompleteEntry:focus {
-  background-color: lightgray;
-  font-weight: 600;
-}
 
 .autocompleteEntryContainer{
   grid-area: entryContainer;
