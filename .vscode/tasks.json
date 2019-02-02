@@ -6,7 +6,12 @@
     {
       "type": "npm",
       "script": "build:dev",
-      "problemMatcher": [],
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "build:ele",
+      "problemMatcher": []
     }
   ]
 }
