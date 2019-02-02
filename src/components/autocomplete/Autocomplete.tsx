@@ -51,7 +51,7 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
   }
 
   private handleKeyDown(event: React.KeyboardEvent<HTMLElement>): void {
-    if (event.key === 'Escape') {
+    if (event.key.toUpperCase() === 'ESCAPE') {
       this.removeAutoCompleteEnries();
     }
   }

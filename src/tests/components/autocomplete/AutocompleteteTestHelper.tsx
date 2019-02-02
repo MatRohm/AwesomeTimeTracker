@@ -19,6 +19,9 @@ export class AutoCompleteTestsHelper {
     this._autocomplete = mount(<Autocomplete dataSource={dataSource} />);
     this._autocomplete.setProps(dataSource);
   }
+  public pressEscape(): void {
+    this._autocomplete.find(this._inputSelector).simulate('keyDown', { key: 'Escape' });
+  }
 
   public tryUnmount(): void {
     if (this._autocomplete) {

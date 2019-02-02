@@ -115,4 +115,18 @@ describe('Test if autocomplete renders correctly', () => {
       expect(element).not.toEqual('');
     });
   });
+
+  it('When the escape key is pressed all entries are removed', () => {
+    // Act
+    _autocomplete.enterTextIntoInput('test');
+    _autocomplete.pressEscape();
+
+    // Assert
+    const count = _autocomplete.getFoundEntriesCount();
+    expect(count).toBe(0);
+  });
+
+  it('When escape is pressed and no entry is rendered nothing happens', () => {
+    expect(() => _autocomplete.pressEscape()).not.toThrow();
+  });
 });
