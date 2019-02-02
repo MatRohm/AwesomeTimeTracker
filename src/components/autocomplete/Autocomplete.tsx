@@ -38,7 +38,8 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
         value={this.state.inputValue.text}
         data-selected-id={this.state.inputValue.id}
         className='autocompleteInput'
-        id='autocompleteInput' />
+        id='autocompleteInput'
+        onKeyDown={this.handleKeyDown.bind(this)} />
 
       <ul
         className='autocompleteEntryContainer'
@@ -47,6 +48,16 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
         {this.renderAutocompleteEntries()}
       </ul>
     </div >;
+  }
+
+  private handleKeyDown(event: React.KeyboardEvent<HTMLElement>): void {
+    if (event.key === 'Escape') {
+      this.removeAutoCompleteEnries();
+    }
+  }
+
+  private removeAutoCompleteEnries(): void {
+    this.setState({ entries: new Array<AutoCompleteEntry>() });
   }
 
   private onChange(eventArgs: React.ChangeEvent<HTMLInputElement>) {
@@ -62,6 +73,10 @@ export default class Autocomplete extends React.Component<{ dataSource: IAutocom
       this.calculatePosition();
       this._autocompleteEntryContainer.current.style.display = 'block';
       return this.state.entries.map((entry) => this.renderAutocompleteEntry(entry));
+    } else {
+      if (this._autocompleteEntryContainer.current) {
+        this._autocompleteEntryContainer.current.style.display = 'none';
+      }
     }
   }
 
