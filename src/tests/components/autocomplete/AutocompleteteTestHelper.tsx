@@ -1,5 +1,5 @@
 import IAutocompleteDataSource from '../../../components/autocomplete/IAutocompleteDataSource';
-import AutoCompleteEntry from '../../../components/autocomplete/AutoCompleteEntry';
+import AutoCompleteEntry from '../../../components/autocomplete/autocompleteEntry/AutocompleteEntry';
 import * as TypeMoq from 'typemoq';
 import { mount, ReactWrapper } from 'enzyme';
 import React from 'react';

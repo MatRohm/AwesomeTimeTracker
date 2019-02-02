@@ -1,5 +1,5 @@
 import IAutocompleteDataSource from '../autocomplete/IAutocompleteDataSource';
-import AutoCompleteEntry from '../autocomplete/AutoCompleteEntry';
+import AutoCompleteEntry from '../autocomplete/autocompleteEntry/AutocompleteEntry';
 
 export class Shoes implements IAutocompleteDataSource {
 

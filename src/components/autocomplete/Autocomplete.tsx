@@ -1,10 +1,10 @@
 import * as React from 'react';
 import IAutocompleteDataSource from './IAutocompleteDataSource';
 import { AutocompleteService } from './AutocompleteService';
-import AutoCompleteEntry from './AutoCompleteEntry';
+import AutoCompleteEntry from './autocompleteEntry/AutocompleteEntry';
 import './Autocomplete.css';
 import { ArgumentUtility } from '../../core/Arguments/ArgumentUtility';
-import AutoCompleteEntryControl from './AutocompleteEntryControl';
+import AutoCompleteEntryControl from './autocompleteEntry/AutocompleteEntryControl';
 import { IAutoCompleteEntryParent } from './IAutoCompleteEntryParent';
 
 export default class Autocomplete

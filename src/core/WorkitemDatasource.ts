@@ -1,4 +1,4 @@
-import AutoCompleteEntry from '../components/autocomplete/AutoCompleteEntry';
+import AutoCompleteEntry from '../components/autocomplete/autocompleteEntry/AutocompleteEntry';
 import IAutocompleteDatasource from '../components/autocomplete/IAutocompleteDataSource';
 import { ArgumentUtility } from './Arguments/ArgumentUtility';
 import { IWorkitem } from './businessModel/IWorkitem';

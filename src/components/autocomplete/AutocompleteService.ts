@@ -1,5 +1,5 @@
 import IAutocompleteDataSource from './IAutocompleteDataSource';
-import AutoCompleteEntry from './AutoCompleteEntry';
+import AutoCompleteEntry from './autocompleteEntry/AutocompleteEntry';
 
 export class AutocompleteService {
   private _dataSource: IAutocompleteDataSource;

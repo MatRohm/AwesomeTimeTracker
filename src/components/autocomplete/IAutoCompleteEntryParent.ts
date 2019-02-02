@@ -1,4 +1,4 @@
-import AutoCompleteEntry from './AutoCompleteEntry';
+import AutoCompleteEntry from './autocompleteEntry/AutocompleteEntry';
 
 export interface IAutoCompleteEntryParent {
   onEntrySelected(entry: AutoCompleteEntry): void;
