@@ -13,7 +13,7 @@ export class App extends React.Component<{}> {
       <main className='mainContent'>
         <CurrentWorkitem></CurrentWorkitem>
       </main>
-      <footer className='footer'>FOOTER!</footer>;
+      <footer className='footer'>FOOTER!</footer>
     </div >;
   }
 }
