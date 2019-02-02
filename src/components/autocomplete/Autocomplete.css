@@ -9,7 +9,7 @@
   padding: 2px;
 }
 
-.autocompleteEntry:hover {
+.autocompleteEntry:hover, .autocompleteEntry:focus {
   background-color: lightgray;
   font-weight: 600;
 }
