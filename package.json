@@ -57,7 +57,7 @@
     "enzyme-adapter-react-16": "^1.8.0",
     "enzyme-to-json": "^3.3.5",
     "jest": "^23.6.0",
-    "ts-jest": "^23.10.5",
-    "typemoq": "^2.7.7"
+    "moq.ts": "^2.7.7",
+    "ts-jest": "^23.10.5"
   }
 }
