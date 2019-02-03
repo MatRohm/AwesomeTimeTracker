@@ -1,6 +1,7 @@
 import React from 'react';
 import AutoCompleteEntry from './AutocompleteEntry';
 import { IAutoCompleteEntryParent } from '../IAutoCompleteEntryParent';
+import './AutocompleteEntry.css';
 
 export default class AutoCompleteEntryControl extends React.Component<{ entry: AutoCompleteEntry, parent: IAutoCompleteEntryParent }> {
   constructor(props: { entry: AutoCompleteEntry, parent: IAutoCompleteEntryParent }) {
