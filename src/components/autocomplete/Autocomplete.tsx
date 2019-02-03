@@ -79,7 +79,7 @@ export default class Autocomplete
     if (this.hasEntriesFound()) {
       this.calculatePosition();
       this._autocompleteEntryContainer.current.style.display = 'block';
-      return this.state.entries.map((currentEntry) => <AutoCompleteEntryControl entry={currentEntry} parent={this} />);
+      return this.state.entries.map((currentEntry) => <AutoCompleteEntryControl key={currentEntry.id} entry={currentEntry} parent={this} />);
     } else {
       if (this._autocompleteEntryContainer.current) {
         this._autocompleteEntryContainer.current.style.display = 'none';
