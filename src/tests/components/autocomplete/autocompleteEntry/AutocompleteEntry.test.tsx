@@ -23,6 +23,11 @@ describe('Test if autocompleteEntry renders correctly', () => {
     _autocompleteEntryControl.click();
     _mock.verify(o => o.onEntrySelected, Times.Once());
   });
+
+  test('When enter is pressed, it calls parent.onEntrySelected()', () => {
+    _autocompleteEntryControl.enter();
+    _mock.verify(o => o.onEntrySelected, Times.Once());
+  });
 });
 
 function createParentMock() {
