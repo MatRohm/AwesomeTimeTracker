@@ -4,7 +4,6 @@ import AutoCompleteEntry from '../../../../components/autocomplete/autocompleteE
 import React from 'react';
 import AutoCompleteEntryControl from '../../../../components/autocomplete/autocompleteEntry/AutocompleteEntryControl';
 import Event from '../../../Event';
-import { ENTERED } from 'react-transition-group/Transition';
 
 export class AutoCompleteEntryControlTestHelper {
   // tslint:disable-next-line:no-any

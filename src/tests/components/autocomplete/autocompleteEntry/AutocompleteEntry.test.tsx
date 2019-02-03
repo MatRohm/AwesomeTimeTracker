@@ -2,7 +2,6 @@ import { AutoCompleteEntryControlTestHelper } from './AutocompleteEntryTestHelpe
 import { IAutoCompleteEntryParent } from '../../../../components/autocomplete/IAutoCompleteEntryParent';
 import AutoCompleteEntry from '../../../../components/autocomplete/autocompleteEntry/AutocompleteEntry';
 import { Mock, It, Times } from 'moq.ts';
-import IAutocompleteDatasource from '../../../../components/autocomplete/IAutocompleteDataSource';
 
 describe('Test if autocompleteEntry renders correctly', () => {
   let _autocompleteEntryControl: AutoCompleteEntryControlTestHelper;
