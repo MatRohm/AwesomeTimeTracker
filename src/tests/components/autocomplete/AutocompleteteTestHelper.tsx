@@ -1,9 +1,10 @@
 import IAutocompleteDataSource from '../../../components/autocomplete/IAutocompleteDataSource';
 import AutoCompleteEntry from '../../../components/autocomplete/autocompleteEntry/AutocompleteEntry';
-import * as TypeMoq from 'typemoq';
 import { mount, ReactWrapper } from 'enzyme';
 import React from 'react';
 import Autocomplete from '../../../components/autocomplete/Autocomplete';
+import Event from '../../Event';
+import { Mock, It, Times, ExpectedGetPropertyExpression } from 'moq.ts';
 
 export class AutoCompleteTestsHelper {
   // tslint:disable-next-line:no-any
@@ -20,7 +21,7 @@ export class AutoCompleteTestsHelper {
     this._autocomplete.setProps(dataSource);
   }
   public pressEscape(): void {
-    this._autocomplete.find(this._inputSelector).simulate('keyDown', { key: 'Escape' });
+    this._autocomplete.find(this._inputSelector).simulate(Event.keyDown, { key: 'Escape' });
   }
 
   public tryUnmount(): void {
@@ -30,20 +31,16 @@ export class AutoCompleteTestsHelper {
   }
 
   public createDataSourceMock(): IAutocompleteDataSource {
-    const mock = TypeMoq.Mock.ofType<IAutocompleteDataSource>();
+    const mock = new Mock<IAutocompleteDataSource>();
 
-    mock.setup(o => o.getEntries('test')).returns(() => {
-      return [
-        new AutoCompleteEntry('1', 'test'),
-        new AutoCompleteEntry('2', 'second test')
-      ];
-    });
+    mock.setup(o => o.getEntries('test')).returns([
+      new AutoCompleteEntry('1', 'test'),
+      new AutoCompleteEntry('2', 'second test')
+    ]);
 
-    mock.setup(o => o.getEntries('t')).returns(() => {
-      return [new AutoCompleteEntry('1', 'test')];
-    });
+    mock.setup(o => o.getEntries('t')).returns([new AutoCompleteEntry('1', 'test')]);
 
-    return mock.object;
+    return mock.object();
   }
 
   public getDisplayStyleOfEntryContainer(): string {
@@ -60,11 +57,11 @@ export class AutoCompleteTestsHelper {
 
   public enterTextIntoInput(value: string): void {
     const simulatedEventArgs = { target: { value } };
-    this._autocomplete.find(this._inputSelector).simulate('change', simulatedEventArgs);
+    this._autocomplete.find(this._inputSelector).simulate(Event.change, simulatedEventArgs);
   }
 
   public clickFirstSerchResult(): void {
-    this._autocomplete.find(this._entrySelector).simulate('click');
+    this._autocomplete.find(this._entrySelector).simulate(Event.click);
   }
 
   public getFoundEntriesCount(): number {

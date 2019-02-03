@@ -1,6 +1,6 @@
 import { Workitem } from '../../../core/businessModel/Workitem';
 import { IWorklog } from '../../../core/businessModel/IWorkLog';
-import * as TypeMoq from 'typemoq';
+import { Mock } from 'moq.ts';
 
 describe('Checks whether Workitem works correctly', () => {
   it('When ctor is called with null, undefined or whitespace it throws an exception', () => {
@@ -30,8 +30,8 @@ describe('Checks whether Workitem works correctly', () => {
   });
 
   function getWorklogMock(seconds: number): IWorklog {
-    const mock = TypeMoq.Mock.ofType<IWorklog>();
-    mock.setup(o => o.getWorkedTimeInSeconds()).returns((val) => seconds);
-    return mock.object;
+    const mock = new Mock<IWorklog>();
+    mock.setup(o => o.getWorkedTimeInSeconds()).returns(seconds);
+    return mock.object();
   }
 });
