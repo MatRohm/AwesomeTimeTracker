@@ -4,7 +4,7 @@ const clientBaseConfig = require('./base.webpack.config');
 const devConfig = {
   devtool: 'source-maps',
   output: {
-    devtoolModuleFilenameTemplate: '[absolute-resource-path]',
+    devtoolModuleFilenameTemplate: '[resource-path]',
   },
 };
 
