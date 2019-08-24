@@ -1,10 +1,10 @@
-import { AutoCompleteTestsHelper } from './AutocompleteteTestHelper';
+import { AutoCompleteControlObject } from './AutoCompleteControlObject';
 
 describe('Test if autocomplete renders correctly', () => {
-  let _autocomplete: AutoCompleteTestsHelper;
+  let _autocomplete: AutoCompleteControlObject;
 
   beforeEach(() => {
-    _autocomplete = new AutoCompleteTestsHelper();
+    _autocomplete = new AutoCompleteControlObject();
   });
 
   afterEach(() => {
@@ -128,5 +128,13 @@ describe('Test if autocomplete renders correctly', () => {
 
   it('When escape is pressed and no entry is rendered nothing happens', () => {
     expect(() => _autocomplete.pressEscape()).not.toThrow();
+  });
+
+  it('When a text is entered and it does not match a existing value it creates oen', () => {
+    // Act
+    _autocomplete.enterTextIntoInput('ThisDoesNotExist');
+    _autocomplete.pressEnter();
+
+    expect(_autocomplete.getDataItemIdOfTextBox()).not.toBeNull();
   });
 });
