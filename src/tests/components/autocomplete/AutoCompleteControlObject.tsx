@@ -6,7 +6,7 @@ import Autocomplete from '../../../components/autocomplete/Autocomplete';
 import Event from '../../Event';
 import { Mock, It, Times, ExpectedGetPropertyExpression } from 'moq.ts';
 
-export class AutoCompleteTestsHelper {
+export class AutoCompleteControlObject {
   // tslint:disable-next-line:no-any
   private _autocomplete: ReactWrapper<any, Readonly<{}>, React.Component<{}, {}, any>>;
 
@@ -21,7 +21,11 @@ export class AutoCompleteTestsHelper {
     this._autocomplete.setProps(dataSource);
   }
   public pressEscape(): void {
-    this._autocomplete.find(this._inputSelector).simulate(Event.keyDown, { key: 'Escape' });
+    this.pressKey('Escape');
+  }
+
+  public pressEnter(): void {
+    this.pressKey('Enter');
   }
 
   public tryUnmount(): void {
@@ -91,5 +95,8 @@ export class AutoCompleteTestsHelper {
       });
 
     return ids;
+  }
+  private pressKey(keyName: string) {
+    this._autocomplete.find(this._inputSelector).simulate(Event.keyDown, { key: keyName });
   }
 }
