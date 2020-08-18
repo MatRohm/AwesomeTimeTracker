@@ -11,6 +11,9 @@ export class WorkitemDataSource implements IAutocompleteDatasource {
     ArgumentUtility.checkDefined('store', store);
     this._store = store;
   }
+  public saveWorkitem(entry: IWorkitem): void {
+    this._store.saveWorkItem(entry);
+  }
 
   public getEntries(filter: string): AutoCompleteEntry[] {
     const workitems = this._store.getWorkItemsByName(filter);
