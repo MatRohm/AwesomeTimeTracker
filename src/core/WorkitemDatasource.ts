@@ -21,8 +21,6 @@ export class WorkitemDataSource implements IAutocompleteDatasource {
       autoCompleteEntries.push(entry);
     }));
 
-    // await workitems;
-
     return autoCompleteEntries;
   }
 
