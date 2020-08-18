@@ -1,6 +1,6 @@
 import { AutoCompleteControlObject } from './AutoCompleteControlObject';
 
-describe('Test if autocomplete renders correctly', () => {
+describe('Test if autocomplete works correctly', () => {
   let _autocomplete: AutoCompleteControlObject;
 
   beforeEach(() => {
@@ -130,11 +130,25 @@ describe('Test if autocomplete renders correctly', () => {
     expect(() => _autocomplete.pressEscape()).not.toThrow();
   });
 
-  it('When a text is entered and it does not match a existing value it creates oen', () => {
+  it('When a text is entered and returns is pressed it does not match a existing value it creates oen', () => {
     // Act
     _autocomplete.enterTextIntoInput('ThisDoesNotExist');
-    _autocomplete.pressEnter();
+    _autocomplete.pressReturn();
 
-    expect(_autocomplete.getDataItemIdOfTextBox()).not.toBeNull();
+    _autocomplete.hasSaveWorkItemBeenCalled();
+  });
+
+  it('When no text is entered and return is pressed it does not do anything', () => {
+    _autocomplete.enterTextIntoInput('');
+    _autocomplete.pressReturn();
+
+    _autocomplete.hasSaveWorkItemNotBeenCalled();
+  });
+
+  it('When no text is enterewd (null) and return is pressed it does not do anything', () => {
+    _autocomplete.enterTextIntoInput(undefined);
+    _autocomplete.pressReturn();
+
+    _autocomplete.hasSaveWorkItemNotBeenCalled();
   });
 });

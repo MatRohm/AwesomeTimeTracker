@@ -54,7 +54,7 @@ export default class Autocomplete
       </ul>
     </div >;
   }
-
+  // 1234456
   public onEntrySelected(entry: AutoCompleteEntry): void {
     this.setState({ inputValue: { id: entry.id, text: entry.name }, entries: new Array<AutoCompleteEntry>() });
   }
@@ -67,6 +67,12 @@ export default class Autocomplete
     if (event.key.toUpperCase() === 'ESCAPE') {
       this.onEscapePressed();
     }
+    if (event.key.toUpperCase() === 'RETURN') {
+      this.onReturnPressed();
+    }
+  }
+  private onReturnPressed(): void {
+    this._service.addEntry(this._inputText.current.value);
   }
 
   private onChange(eventArgs: React.ChangeEvent<HTMLInputElement>) {

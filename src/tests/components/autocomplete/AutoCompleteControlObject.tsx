@@ -5,6 +5,7 @@ import React from 'react';
 import Autocomplete from '../../../components/autocomplete/Autocomplete';
 import Event from '../../Event';
 import { Mock, It, Times, ExpectedGetPropertyExpression } from 'moq.ts';
+import IAutocompleteDatasource from '../../../components/autocomplete/IAutocompleteDataSource';
 
 export class AutoCompleteControlObject {
   // tslint:disable-next-line:no-any
@@ -13,38 +14,27 @@ export class AutoCompleteControlObject {
   private _entrySelector = '.autocompleteEntry';
   private _inputSelector = '.autocompleteInput';
   private _entryContainerSelector = '.autocompleteEntryContainer';
+  private _dataSource: IAutocompleteDatasource;
+  private _mock: Mock<IAutocompleteDataSource>;
 
   constructor() {
-    const dataSource = this.createDataSourceMock();
+    this._dataSource = this.createDataSourceMock();
 
-    this._autocomplete = mount(<Autocomplete dataSource={dataSource} />);
-    this._autocomplete.setProps(dataSource);
+    this._autocomplete = mount(<Autocomplete dataSource={this._dataSource} />);
+    this._autocomplete.setProps(this._dataSource);
   }
   public pressEscape(): void {
     this.pressKey('Escape');
   }
 
-  public pressEnter(): void {
-    this.pressKey('Enter');
+  public pressReturn(): void {
+    this.pressKey('Return');
   }
 
   public tryUnmount(): void {
     if (this._autocomplete) {
       this._autocomplete.unmount();
     }
-  }
-
-  public createDataSourceMock(): IAutocompleteDataSource {
-    const mock = new Mock<IAutocompleteDataSource>();
-
-    mock.setup(o => o.getEntries('test')).returns([
-      new AutoCompleteEntry('1', 'test'),
-      new AutoCompleteEntry('2', 'second test')
-    ]);
-
-    mock.setup(o => o.getEntries('t')).returns([new AutoCompleteEntry('1', 'test')]);
-
-    return mock.object();
   }
 
   public getDisplayStyleOfEntryContainer(): string {
@@ -96,6 +86,29 @@ export class AutoCompleteControlObject {
 
     return ids;
   }
+
+  public hasSaveWorkItemBeenCalled(): void {
+    this._mock.verify(instance => instance.saveWorkitem, Times.Once());
+  }
+
+  public hasSaveWorkItemNotBeenCalled(): void {
+    this._mock.verify(instance => instance.saveWorkitem, Times.Never());
+  }
+
+  private createDataSourceMock(): IAutocompleteDataSource {
+    this._mock = new Mock<IAutocompleteDataSource>();
+
+    this._mock.setup(o => o.getEntries('test')).returns([
+      new AutoCompleteEntry('1', 'test'),
+      new AutoCompleteEntry('2', 'second test')
+    ]);
+
+    this._mock.setup(o => o.getEntries('t')).returns([new AutoCompleteEntry('1', 'test')]);
+    this._mock.setup(o => o.saveWorkitem(It.IsAny())).callback(() => { return; });
+
+    return this._mock.object();
+  }
+
   private pressKey(keyName: string) {
     this._autocomplete.find(this._inputSelector).simulate(Event.keyDown, { key: keyName });
   }
