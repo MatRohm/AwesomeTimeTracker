@@ -54,7 +54,7 @@ export default class Autocomplete
       </ul>
     </div >;
   }
-  // 1234456
+
   public onEntrySelected(entry: AutoCompleteEntry): void {
     this.setState({ inputValue: { id: entry.id, text: entry.name }, entries: new Array<AutoCompleteEntry>() });
   }
