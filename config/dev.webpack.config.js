@@ -24,4 +24,4 @@ const devConfig = {
 };
 
 const webpackConfig = merge(clientBaseConfig, devConfig);
-module.exports = [clientBaseConfig, webpackConfig];
+module.exports = [webpackConfig];
