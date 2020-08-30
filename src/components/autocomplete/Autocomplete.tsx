@@ -39,7 +39,7 @@ export default class Autocomplete
         ref={this._inputText}
         type='text'
         placeholder='Start typing text...'
-        onChange={this.onChange.bind(this)}
+        onChange={this.oninputChange.bind(this)}
         value={this.state.inputValue.text}
         data-selected-id={this.state.inputValue.id}
         className='autocompleteInput'
@@ -64,18 +64,52 @@ export default class Autocomplete
   }
 
   private handleKeyDown(event: React.KeyboardEvent<HTMLElement>): void {
-    if (event.key.toUpperCase() === 'ESCAPE') {
+    const eventKey = event.key.toUpperCase();
+
+    console.log(`eventyKey = ${eventKey}`);
+
+    if (eventKey === 'ESCAPE') {
       this.onEscapePressed();
     }
-    if (event.key.toUpperCase() === 'RETURN') {
+    else if (eventKey === 'RETURN') {
       this.onReturnPressed();
     }
+    else if (eventKey === 'ARROWDOWN') {
+      this.onArrowDownPressed();
+    }
   }
+
+  public onArrowDownPressed(): void {
+    if (!this.hasEntriesFound()) {
+      return;
+    }
+
+    this.focusNextElement();
+  }
+
+  private focusNextElement(): void {
+    let element: HTMLLIElement
+    element = document.querySelector('li.autocompleteEntry:focus');
+
+    if (!element) {
+      element = document.querySelector('li.autocompleteEntry');
+    }
+    else {
+      element = document.querySelector('li.autocompleteEntry:focus~li.autocompleteEntry');
+
+      if (!element)
+        return;
+    }
+
+    element.focus();
+  }
+
+
   private onReturnPressed(): void {
     this._service.addEntry(this._inputText.current.value);
   }
 
-  private onChange(eventArgs: React.ChangeEvent<HTMLInputElement>) {
+  private oninputChange(eventArgs: React.ChangeEvent<HTMLInputElement>) {
     const searchText = eventArgs.target.value;
     const entries = this._service.searchEntries(searchText);
     this.setState({ inputValue: { text: searchText, id: '' }, entries });

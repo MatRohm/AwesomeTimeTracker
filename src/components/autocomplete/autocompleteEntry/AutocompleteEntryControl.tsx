@@ -35,8 +35,12 @@ export default class AutoCompleteEntryControl extends React.Component<{ entry: A
       this.props.parent.onEscapePressed();
     }
 
-    if (key === 'ENTER') {
+    else if (key === 'ENTER') {
       this.props.parent.onEntrySelected(this.props.entry);
+    }
+
+    else if (key === 'ARROWDOWN') {
+      this.props.parent.onArrowDownPressed();
     }
   }
 }
