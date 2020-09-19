@@ -42,5 +42,9 @@ export default class AutoCompleteEntryControl extends React.Component<{ entry: A
     else if (key === 'ARROWDOWN') {
       this.props.parent.onArrowDownPressed();
     }
+
+    else if (key === 'ARROWUP') {
+      this.props.parent.onArrowUpPressed();
+    }
   }
 }

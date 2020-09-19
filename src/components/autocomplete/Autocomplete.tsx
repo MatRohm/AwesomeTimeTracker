@@ -15,6 +15,9 @@ export default class Autocomplete
   private _service: AutocompleteService;
   private _autocompleteEntryContainer: React.RefObject<HTMLUListElement>;
 
+  private _keyStrokeActions: { [key: string]: () => void } = this.initKeyActions();
+
+
   constructor(props: { dataSource: IAutocompleteDataSource }) {
     super(props);
     ArgumentUtility.checkDefined('props.dataSource', props.dataSource);
@@ -63,20 +66,21 @@ export default class Autocomplete
     this.setState({ entries: new Array<AutoCompleteEntry>() });
   }
 
+  private initKeyActions(): { [key: string]: () => void } {
+    let actions: { [key: string]: () => void } = {};
+    actions["ESCAPE"] = this.onEscapePressed.bind(this);
+    actions["RETURN"] = this.onReturnPressed.bind(this);
+    actions["ARROWDOWN"] = this.onArrowDownPressed.bind(this);
+    actions["ARROWUP"] = this.onArrowUpPressed.bind(this);
+    return actions;
+  }
+
   private handleKeyDown(event: React.KeyboardEvent<HTMLElement>): void {
     const eventKey = event.key.toUpperCase();
 
-    console.log(`eventyKey = ${eventKey}`);
-
-    if (eventKey === 'ESCAPE') {
-      this.onEscapePressed();
-    }
-    else if (eventKey === 'RETURN') {
-      this.onReturnPressed();
-    }
-    else if (eventKey === 'ARROWDOWN') {
-      this.onArrowDownPressed();
-    }
+    let keyStrokeAction = this._keyStrokeActions[eventKey];
+    if (keyStrokeAction != null && keyStrokeAction != undefined)
+      keyStrokeAction();
   }
 
   public onArrowDownPressed(): void {
@@ -104,6 +108,34 @@ export default class Autocomplete
     element.focus();
   }
 
+
+  public onArrowUpPressed(): void {
+    if (!this.hasEntriesFound()) {
+      return;
+    }
+
+    this.focusPreviousElement();
+  }
+
+  private focusPreviousElement(): void {
+    let element: HTMLLIElement
+    element = document.querySelector('li.autocompleteEntry:focus');
+
+    if (!element) {
+      return;
+    }
+    else {
+      let currenstSelectedData = element.getAttribute("data-selected-id");
+      if (currenstSelectedData == "1") {
+        this._inputText.current.focus();
+      }
+      else {
+        let curreltSelectedDataNumber = Number(currenstSelectedData) - 1;
+        element = document.querySelector(`li.autocompleteEntry[data-selected-id="${curreltSelectedDataNumber}"]`);
+        element.focus();
+      }
+    }
+  }
 
   private onReturnPressed(): void {
     this._service.addEntry(this._inputText.current.value);
