@@ -1,14 +1,5 @@
 .currentWorkItemContainer{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-}
-
-.currentWorkItem{
-  display: inline-block;
-  flex:1;
-}
-
-.currentWorkItemLabel{
-  margin-right: 10px;
+  display: grid;
+  grid-template-columns: auto 50px;
+  grid-template-rows: auto;
 }
