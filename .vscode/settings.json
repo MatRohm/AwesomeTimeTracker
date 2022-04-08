@@ -1,0 +1,13 @@
+{
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.autoClosingQuotes": "always",
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript"
+  ]
+}
