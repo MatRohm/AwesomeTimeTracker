@@ -3,15 +3,15 @@ import './app.css';
 import ReactDOM from 'react-dom/client';
 import { emitter } from './observables/sample';
 
-const App = () =>  <div className='root'>
-<header className='header'>header!</header>
-<div className='menu'>
-  Left pane
+const App = () => <div className='root'>
+  <header className='header'>header!</header>
+  <div className='menu'>
+    Left pane
   </div>
-<main className='mainContent'>
-  MAIN CONTENT!
-</main>
-<footer className='footer'>FOOTER!</footer>
+  <main className="mainContent">
+    MAIN CONTENT!
+  </main>
+  <footer className='footer'>FOOTER!</footer>
 </div >;
 
 emitter.subscribe((value: string) => console.log('JUHU ' + value));
