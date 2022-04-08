@@ -4,9 +4,10 @@
         "sourceMap": true,
         "noImplicitAny": true,
         "module": "es6",
-        "target": "es5",
+        "target": "es6",
         "jsx": "react",
         "allowJs": true,
+        "strict": true,
         "lib": [
             "es6",
             "es2015",
