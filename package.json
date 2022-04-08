@@ -5,6 +5,7 @@
   "main": "./src/main.js",
   "scripts": {
     "build": "webpack --config ./webpack.config.js --mode=development",
+    "watch": "webpack --config ./webpack.config.js  --mode=development --watch",
     "start": "electron ."
   },
   "author": "Matthias Rohrmoser",
