@@ -15,7 +15,16 @@
         "indent": [
             "error",
             2
-        ]
+        ],
+        "key-spacing": [
+            "error",
+            {
+                "beforeColon" : false,
+                "afterColon" : true,
+                "mode":"strict"
+            }
+        ],
+        "semi": ["error", "always"]
     },
     "parserOptions": {
         "sourceType": "module"
@@ -40,7 +49,13 @@
             },
             "plugins": [
                 "@typescript-eslint"
-            ]
+            ],
+            "rules": {
+                "@typescript-eslint/explicit-member-accessibility": ["error"],
+                "@typescript-eslint/space-before-blocks": ["error"],
+                "@typescript-eslint/type-annotation-spacing": ["error", {"before":false, "after":true}],
+                "@typescript-eslint/semi": ["error", "always"]
+            }
         }
     ]
 }
