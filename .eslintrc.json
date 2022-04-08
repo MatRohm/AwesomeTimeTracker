@@ -1,0 +1,46 @@
+{
+    "root": true,
+    "extends": [
+        "eslint:recommended"
+    ],
+    "env": {
+        "node": true,
+        "es6": true
+    },
+    "rules": {
+        "quotes": [
+            2,
+            "single"
+        ],
+        "indent": [
+            "error",
+            2
+        ]
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "ignorePatterns": [
+        "_dist/*"
+    ],
+    "overrides": [
+        {
+            "files": [
+                "*.ts",
+                "*.tsx"
+            ],
+            "extends": [
+                "plugin:@typescript-eslint/eslint-recommended",
+                "plugin:@typescript-eslint/recommended"
+            ],
+            "parser": "@typescript-eslint/parser",
+            "parserOptions": {
+                "sourceType": "module",
+                "project": "./tsconfig.json"
+            },
+            "plugins": [
+                "@typescript-eslint"
+            ]
+        }
+    ]
+}

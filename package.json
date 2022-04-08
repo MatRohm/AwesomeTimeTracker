@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --config ./webpack.config.js --mode=development",
     "watch": "webpack --config ./webpack.config.js  --mode=development --watch",
-    "start": "electron ."
+    "start": "electron .",
+    "lint": "eslint . --fix"
   },
   "author": "Matthias Rohrmoser",
   "license": "ISC",
@@ -15,10 +16,13 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@types/rx": "^4.1.2",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "@typescript-eslint/parser": "^5.18.0",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.1",
     "electron": "^18.0.3",
     "electron-reload": "^2.0.0-alpha.1",
+    "eslint": "^7.32.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.5.1",
