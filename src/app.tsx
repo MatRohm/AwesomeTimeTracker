@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './app.css';
 import ReactDOM from 'react-dom/client';
+import { emitter } from './observables/sample';
 
 const App = () =>  <div className='root'>
 <header className='header'>header!</header>
@@ -13,7 +14,8 @@ const App = () =>  <div className='root'>
 <footer className='footer'>FOOTER!</footer>
 </div >;
 
-
+emitter.subscribe((value: string) => console.log('JUHU ' + value));
+emitter.next('DEAN');
 const container = document.getElementById('root');
 
 const root = ReactDOM.createRoot(container);
