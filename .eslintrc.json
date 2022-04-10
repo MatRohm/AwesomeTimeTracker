@@ -8,14 +8,8 @@
         "es6": true
     },
     "rules": {
-        "quotes": [
-            2,
-            "single"
-        ],
-        "indent": [
-            "error",
-            2
-        ],
+        "quotes": [2, "single"],
+        "indent": ["error", 2],
         "key-spacing": [
             "error",
             {
@@ -54,7 +48,8 @@
                 "@typescript-eslint/explicit-member-accessibility": ["error"],
                 "@typescript-eslint/space-before-blocks": ["error"],
                 "@typescript-eslint/type-annotation-spacing": ["error", {"before":false, "after":true}],
-                "@typescript-eslint/semi": ["error", "always"]
+                "@typescript-eslint/semi": ["error", "always"],
+                "@typescript-eslint/space-infix-ops": ["error", { "int32Hint": false }]
             }
         }
     ]
