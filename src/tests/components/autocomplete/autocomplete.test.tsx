@@ -1,13 +1,17 @@
-import { AutoComplete, AutocompleteEntry } from '../../../components/autocomplete/autcomplete';
+import { AutoComplete, AutocompleteEntry } from '../../../components/autocomplete/Autcomplete';
 import * as TypeMoq from 'typemoq';
 import { AutocompleteSource } from '../../../components/autocomplete/autocompleteSource';
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react';
-
-const autoCompleteSourceMock = TypeMoq.Mock.ofType<AutocompleteSource<AutocompleteEntry>>();
+import {render, fireEvent, screen, cleanup,} from '@testing-library/react';
 
 describe('Tests wether the autocomplete works correclty or not', () => {
-  it('Basic rendering wit label works', () => {
+  let autoCompleteSourceMock;
+
+  beforeEach(()  => {
+    autoCompleteSourceMock = TypeMoq.Mock.ofType<AutocompleteSource>();
+  });
+
+  test('Basic rendering with label works', () => {
     // Arrange
     const sut = <AutoComplete name='test-name' label='test-label' autocompleteSource={autoCompleteSourceMock.target}/>;
 
@@ -25,7 +29,7 @@ describe('Tests wether the autocomplete works correclty or not', () => {
     expect(label.textContent).toBe('test-label');
   });
 
-  it('Basic rendering without label works', () => {
+  test('Basic rendering without label works', () => {
     // Arrange
     const sut = <AutoComplete name='test-name' label='' autocompleteSource={autoCompleteSourceMock.target}/>;
 
@@ -40,21 +44,42 @@ describe('Tests wether the autocomplete works correclty or not', () => {
     expect(label).toBeNull();
   });
 
-  it('When entering a text, search is called', () => {
+  test('When entering a text and an entry is found, a list is rendered', () => {
     // Arrange
     autoCompleteSourceMock
-      .setup(x=>x.search(TypeMoq.It.isAnyString()))
+      .setup(autocompleteSource => autocompleteSource.search(TypeMoq.It.isAnyString()))
+      .returns(() => new Array<AutocompleteEntry>({ name: '123'}));
+
+    const sut = <AutoComplete name='test-name' label='123' autocompleteSource={autoCompleteSourceMock.object}/>;   
+    const renderedSut = render(sut);
+    const input = renderedSut.getByTestId('autocomplete-input');
+
+    // Act
+    fireEvent.change(input, {target: {value: 123}});
+
+    // Assert
+    const listitems = screen.queryAllByRole('listitem');
+    expect(listitems.length).toBe(1);
+  });
+  
+  test('When entering a text and no entry is found, no list is rendered', () => {
+    // Arrange
+    autoCompleteSourceMock
+      .setup(autocompleteSource => autocompleteSource.search(TypeMoq.It.isAnyString()))
       .returns(() => new Array<AutocompleteEntry>());
 
     const sut = <AutoComplete name='test-name' label='' autocompleteSource={autoCompleteSourceMock.object}/>;   
     const renderedSut = render(sut);
+    const input = renderedSut.getByTestId('autocomplete-input');
 
     // Act
-    const input = renderedSut.getByTestId('autocomplete-input');
     fireEvent.change(input, {target: {value: 123}});
     
     // Assert
     expect(input.getAttribute('value')).toBe('123');
     autoCompleteSourceMock.verify(o=>o.search('123'), TypeMoq.Times.once());
+
+    const listitems =  renderedSut.queryAllByRole('listitem');
+    expect(listitems.length).toBe(0);
   });
 });

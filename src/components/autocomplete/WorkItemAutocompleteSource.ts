@@ -2,7 +2,8 @@ import { WorkItem } from '../../domain/WorkItem';
 import { repository } from '../../domain/WorkRepository';
 import { AutocompleteSource } from './autocompleteSource';
 
-class WorkItemAutoCompleteSource implements AutocompleteSource<WorkItem> {
+class WorkItemAutoCompleteSource implements AutocompleteSource 
+{  
   public getValues(): WorkItem[] {   
     const workItems = repository.getWorkItems();
     return workItems;

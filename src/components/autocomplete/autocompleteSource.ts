@@ -1,6 +1,5 @@
-import { AutocompleteEntry } from './autcomplete';
+import { AutocompleteEntry } from './Autcomplete';
 
-export interface AutocompleteSource<T extends AutocompleteEntry> {
-  getValues(): Array<T>
-  search(searchValue: string): T[];
+export interface AutocompleteSource {
+  search(searchValue: string): AutocompleteEntry[];
 }

@@ -1,4 +1,4 @@
-import { AutocompleteEntry } from '../components/autocomplete/autcomplete';
+import { AutocompleteEntry } from '../components/autocomplete/Autcomplete';
 
 export class WorkItem implements AutocompleteEntry {
   private _name: string;
