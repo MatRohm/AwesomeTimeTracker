@@ -15,17 +15,16 @@ export const AutoComplete = <T extends AutocompleteEntry>(props: AutoCompletePro
   const [text, setText] = useState('');
   const [entries, setEntries] = useState<T[]>([]);
 
-  return <span id={'autocomplete-' + props.name +'-container'} className="autcomplete-container">
-    {props.label ? <label>{props.label} </label> : ''}
+  return <span id={'autocomplete-' + props.name + '-container'} className="autcomplete-container">
+    {props.label ? <label data-testid='autocomplete-label'>{props.label}</label> : ''}
     
-    <input type="text" id={'autocompete-' + props.name + '-textbox'} value={text} className="autocomplete-textbox" onChange={event => {
+    <input type="text" id={'autocompete-' + props.name + '-textbox'} value={text} data-testid="autocomplete-input" className="autocomplete-textbox" onChange={event => {
       const value = event.target.value;
-      const entries = props.autocompleteSource.search(value);
-
       if(value == '') {
         setEntries([]);
       }
       else{
+        const entries = props.autocompleteSource.search(value);
         setEntries(entries);
       }
 
