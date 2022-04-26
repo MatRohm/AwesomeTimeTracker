@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './app.css';
 import ReactDOM from 'react-dom/client';
-import { AutoComplete } from './components/autocomplete/autcomplete';
+import { AutoComplete } from './components/autocomplete/Autcomplete';
 import { emitter } from './observables/sample';
 import { workItemAutoCompleteSource } from './components/autocomplete/WorkItemAutocompleteSource';
 

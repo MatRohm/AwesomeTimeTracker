@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { AutoCompleteEntries } from './autocompleteEntries';
 import { AutocompleteSource } from './autocompleteSource';
 
 type AutoCompleteProps = {
@@ -36,14 +37,13 @@ export const AutoComplete = (props: AutoCompleteProps): JSX.Element => {
     
       <input 
         type="text" 
-        id={'autocompete-' + props.name + '-textbox'} 
+        id={'autocomplete-' + props.name + '-textbox'} 
         value={text} 
         data-testid="autocomplete-input" 
         className="autocomplete-input" 
         onChange={onChange} />
 
-
-      {entries.length > 0 && <ul>{entries.map(entry => <li key={entry.name}>{entry.name}</li>)}</ul>}
+      <AutoCompleteEntries entries={entries}/>
     </span>
   );
 };
